@@ -6,6 +6,7 @@ window.Deck = (() => {
   const slides = [];
   const qs = new URLSearchParams(location.search);
   const SHOT = qs.has('shot');
+  const PUBLIC = document.documentElement.hasAttribute('data-public'); // web copy: no notes, no presenter
   const ctx = { shot: SHOT, W, H, particles: window.Particles };
   let idx = -1, step = 0, els = [];
   let presenter = null, clockStart = null;
@@ -162,6 +163,7 @@ window.Deck = (() => {
     else if (k === 'End') go(slides.length - 1, 0);
     else if (k === 'b' || k === 'B' || k === '.') $('#black').classList.toggle('on');
     else if (k === 'f' || k === 'F') Particles.toggleFreeze();
+    else if (PUBLIC) return;
     else if (k === 'n' || k === 'N') { $('#notes').classList.toggle('on'); renderNotes(); }
     else if (k === 'p' || k === 'P') openPresenter();
     else if (k === 't' || k === 'T') { clockStart = Date.now(); renderPresenter(); }
