@@ -124,10 +124,11 @@ Deck.act(5, 'Acto 5 · Valor real vs. hype', [
           <p class="cap" style="margin-top:8px;font-size:56px"><b>créditos</b></p>
         </div>
         <div class="panel" data-step-only="5">
-          <p class="pun">Un clasificador tipado hace el mismo trabajo por <em>centavos</em>.</p>
+          <p class="pun">Un clasificador tipado hace <em>casi</em> el mismo trabajo por <em>centavos</em>.</p>
           <div class="bench">
             <span><span class="k">4 mil títulos · Jev</span><span class="v accent">$0.16</span></span>
             <span><span class="k">el LLM</span><span class="v">$11–21</span></span>
+            <span><span class="k">coinciden (persona)</span><span class="v">88%</span></span>
           </div>
         </div>
       </div>
@@ -136,7 +137,7 @@ Deck.act(5, 'Acto 5 · Valor real vs. hype', [
       <p>Esta es una historia real, de gente de Astronomer, y me la robo porque es perfecta. Tenían que clasificar unos 250 mil títulos de puesto: persona y función. Fueron directo al LLM con AI_CLASSIFY de Snowflake.</p>
       <p>Un bug hizo que el modelo regresara NULL en algunas etiquetas. Y el código de reintento, muy servicial, mandaba cada NULL de vuelta al modelo cada media hora. En un ambiente de dev. Durante dos semanas.</p>
       <p>El resultado: unos 44 mil millones de tokens, como 61,600 créditos. Ojo, no les voy a decir pesos ni dólares, porque el artículo mismo no cuadra entre créditos y dólares; los tokens y los créditos sí están medidos.</p>
-      <p>Y el remate: esa pregunta no era un texto, era un juicio con etiquetas fijas. Un clasificador tipado, Jev en su benchmark, hizo 4 mil títulos por 16 centavos de dólar; el LLM, entre 11 y 21 dólares. Ahí está el punto: no todo necesita un LLM. Ahora, ¿quién te vende lo contrario?</p>
+      <p>Y el remate: esa pregunta no era un texto, era un juicio con etiquetas fijas. Un clasificador tipado, Jev en su benchmark, hizo 4 mil títulos por 16 centavos de dólar; el LLM, entre 11 y 21 dólares. No es idéntico: coincidieron en 88% de las personas, y donde no coincidieron, las reglas escritas casi siempre le dieron la razón a Jev. Ahí está el punto: no todo necesita un LLM. Ahora, ¿quién te vende lo contrario?</p>
       <p class="dir">[Un click por número. Dejar que el silencio haga el trabajo en "2 semanas".]</p>`,
   },
   {
