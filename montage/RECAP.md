@@ -9,13 +9,14 @@ Rebuild: `montage/make.sh` (edit list in `cues.tsv`, caption words in `words.tsv
 
 ## Music (v3)
 
-An original score, synthesized by `score.py`, so there's no licensed music and no Content ID claim on the YouTube stream. It's placed from `captions.ass`, so it stays in sync after a re-cut:
-- Ticking drone under the hook, then a braam and taiko hit on **THE DATA PUB · JULIO 2023**.
-- An 8th-note pulse in D minor that thickens act by act (i–VI–III–VII after JUGUETE, an octave layer after 3 MESES).
-- Taiko hits on every slam word, with a lift into **TRIUNFAR**.
-- Then near-silence, a heartbeat and a riser for the cliffhanger, a braam on **40 AÑOS**, and a final unresolved braam (A over D) on **¿Sigue siendo cierto?**.
+A solo jazz-drum score in the spirit of Antonio Sánchez's *Birdman* score, because the 2023 talk was built on Birdman. `score.py` synthesizes the kit (ride, hi-hat, snare, kick, three toms, crash), so there's no licensed audio and no Content ID claim on the stream. Everything is placed from `captions.ass`, so it stays in sync after a re-cut:
+- **Silence** under the hook: "esto es marketing" lands dry. The drums enter with a kick and crash on the **THE DATA PUB · JULIO 2023** card.
+- **Swing:** a swung ride, hi-hat on 2 and 4, a feathered kick, and snare comping that gets busier act by act. There's a pickup every 4 bars.
+- **Hits:** a tom fill into every slam word, with crash and kick on the word. The tempo stretches between those hits (around 150 BPM), so each one lands on its word, like a drummer playing to picture.
+- **Cliffhanger:** the biggest crash on **TRIUNFAR**, then a lone hi-hat like a clock, then a floor-tom rumble and cymbal swell into **40 AÑOS**. A snare roll was tried here, but it covered the line.
+- **Ending:** "Tres años después" plays in silence, then a cymbal swell and one last hit on **¿Sigue siendo cierto?** that rings out.
 
-Mix: the bed is at about −21 LUFS before ducking and drops about 16 dB under the voice (sidechain on the speech), coming back up in the gaps. In the 300–4000 Hz speech band the voice sits a median 33 dB above the music. Final −16 LUFS. The no-music cut is kept at `work/v2/nomusic.mp4`.
+Mix: the kit is at about −19 LUFS before ducking and drops about 23 dB under the voice (sidechain on the speech), coming back up in the gaps. In the 300–4000 Hz speech band the voice sits a median 30 dB above the drums, and every core word clears 6 dB. Final −16 LUFS. The no-music cut is kept at `work/v2/nomusic.mp4`.
 
 ## Beats
 

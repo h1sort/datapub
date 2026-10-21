@@ -1,16 +1,19 @@
 #!/usr/bin/env python3
-"""Original trailer score for the recap, synthesized here (no licensed music,
-so no Content ID on the stream), then mixed under the speech with ducking.
+"""Solo jazz-drum score for the recap, in the spirit of Antonio Sánchez's
+Birdman score (the 2023 talk was built on Birdman). Synthesized here, so no
+licensed audio and no Content ID on the stream; mixed under the speech with ducking.
 
   uv run --no-project --with numpy --with scipy python score.py \
       work/v2/captions.ass work/v2/nomusic.mp4 out/anteriormente.mp4
 
-Every hit is placed from captions.ass, so a re-cut stays in sync:
-  Slam words (MARKETING, 3 MESES, ...) -> taiko hits; the last one (40 AÑOS) -> braam
-  Card events -> "THE DATA PUB" stamp braam, "¿Sigue siendo cierto?" final braam
-Shape: ticking drone under the hook -> 8th-note ostinato that thickens act by act
-(D minor, then i-VI-III-VII) -> lift into TRIUNFAR -> near-silence + heartbeat +
-riser for the cliffhanger -> braam on 40 AÑOS -> final braam that rings out.
+Everything is placed from captions.ass, so a re-cut stays in sync:
+  silence under the hook -> kick + crash on the "THE DATA PUB" stamp card
+  swung ride + hi-hat on 2 and 4 + loose snare comping, busier act by act
+  a tom fill into every Slam word, crash + kick on the word
+  the tempo stretches between anchors so each hit lands on its word, like a
+  drummer playing to picture
+  cliffhanger: lone hi-hat, snare roll into 40 AÑOS, silence on "Tres años
+  después", cymbal swell and a last hit on "¿Sigue siendo cierto?" that rings out
 """
 import json, re, subprocess, sys
 
@@ -20,22 +23,11 @@ from scipy.signal import butter, fftconvolve, sosfilt
 
 FFMPEG = "/opt/homebrew/opt/ffmpeg-full/bin/ffmpeg"
 SR = 48000
-BEAT = 60 / 96                      # 96 BPM
-EIGHTH = BEAT / 2
-BAR = BEAT * 4
-MUSIC_LUFS = -21                    # score level before ducking; speech sits at -16
-DUCK = "threshold=0.02:ratio=5:attack=15:release=380:knee=3"  # ~14 dB under the voice, full in the gaps
+TEMPO = 150                          # nominal BPM; each segment stretches to land on its anchor
+SWING = 2 / 3                        # swung 8th sits 2/3 into the beat
+MUSIC_LUFS = -19                     # score level before ducking; speech sits at -16
+DUCK = "threshold=0.02:ratio=5:attack=15:release=380:knee=3"  # ~15 dB under the voice, full in the gaps
 rng = np.random.default_rng(2026)
-
-# note frequencies (Hz)
-N = {n: 440 * 2 ** ((i - 9) / 12) for i, n in enumerate(
-    ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"])}
-def hz(name, octave): return N[name] * 2 ** (octave - 4)
-
-CHORDS = {  # root, triad tones (pitch classes) for the ostinato
-    "Dm": ("D", ["D", "F", "A"]), "Bb": ("A#", ["A#", "D", "F"]),
-    "F": ("F", ["F", "A", "C"]), "C": ("C", ["C", "E", "G"]), "A": ("A", ["A", "C#", "E"]),
-}
 
 
 # ------------------------------------------------------------------ timeline
@@ -56,169 +48,156 @@ def duration(path):
     return float(r.stdout)
 
 
-# ------------------------------------------------------------------ synth
+# ------------------------------------------------------------------ the kit
 def t_axis(sec): return np.arange(int(sec * SR)) / SR
-
-def lp(x, fc, order=2): return sosfilt(butter(order, fc, "low", fs=SR, output="sos"), x)
 def hp(x, fc, order=2): return sosfilt(butter(order, fc, "high", fs=SR, output="sos"), x)
+def lp(x, fc, order=2): return sosfilt(butter(order, fc, "low", fs=SR, output="sos"), x)
 def bp(x, lo, hi): return sosfilt(butter(2, [lo, hi], "band", fs=SR, output="sos"), x)
 
-def saw(f, t, detune=0.0):
-    ph = rng.random()
-    return 2 * ((f * (1 + detune) * t + ph) % 1) - 1
+
+def metal(sec, lo, hi, decay, seed_shift=1.0):
+    """Cymbal tone: inharmonic square partials (the classic 808 ratios) plus noise."""
+    t = t_axis(sec)
+    x = sum(np.sign(np.sin(2 * np.pi * f * seed_shift * t + rng.random() * 6.28))
+            for f in (205.3, 304.4, 369.6, 522.7, 540.0, 800.0)) / 6
+    x = 0.65 * x + 0.35 * rng.standard_normal(len(t))
+    return bp(x, lo, hi) * np.exp(-t / decay)
 
 
-def place(bus, t0, sig, pan=0.0, gain=1.0):
-    """Add mono sig to stereo bus at t0 (s), equal-power pan in [-1, 1]."""
-    i = int(t0 * SR)
+KIT = {}
+def build_kit():
+    t = t_axis(1.6)
+    ping = np.sin(2 * np.pi * 4100 * t) * np.exp(-t / 0.05) * 0.25
+    KIT["ride"] = metal(1.6, 3000, 11000, 0.55) + ping[: int(1.6 * SR)]
+    KIT["ride_bell"] = metal(1.6, 1800, 8000, 0.7, 1.33) * 1.2 + ping[: int(1.6 * SR)] * 2
+    KIT["chick"] = hp(metal(0.12, 5000, 14000, 0.025), 6000)
+    KIT["hat_open"] = metal(0.5, 5000, 14000, 0.16)
+    KIT["crash"] = metal(3.2, 2200, 13000, 1.1, 1.17) * 1.4
+    tk = t_axis(0.45)
+    f = 52 + 70 * np.exp(-tk / 0.025)
+    KIT["kick"] = np.tanh(2 * (np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-tk / 0.16)
+                               + lp(rng.standard_normal(len(tk)), 3000) * np.exp(-tk / 0.004) * 0.4))
+    ts = t_axis(0.35)
+    body = (np.sin(2 * np.pi * 190 * ts) + 0.6 * np.sin(2 * np.pi * 330 * ts)) * np.exp(-ts / 0.06)
+    wires = bp(rng.standard_normal(len(ts)), 1500, 9000) * np.exp(-ts / 0.13)
+    KIT["snare"] = np.tanh(1.5 * (0.6 * body + wires))
+    rim = t_axis(0.08)
+    KIT["rim"] = bp(rng.standard_normal(len(rim)), 1800, 6000) * np.exp(-rim / 0.012) \
+        + np.sin(2 * np.pi * 1700 * rim) * np.exp(-rim / 0.01)
+    for name, f0, dec in (("tom_hi", 210, 0.3), ("tom_mid", 150, 0.38), ("tom_floor", 98, 0.55)):
+        tt = t_axis(dec * 4)
+        f = f0 * (1 + 0.25 * np.exp(-tt / 0.03))
+        KIT[name] = np.tanh(1.6 * (np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-tt / dec)
+                                    + bp(rng.standard_normal(len(tt)), 400, 5000) * np.exp(-tt / 0.02) * 0.3))
+    KIT["swell"] = metal(3.0, 2500, 12000, 99) * np.linspace(0, 1, int(3.0 * SR)) ** 2.2  # mallet roll on a cymbal
+
+
+PAN = {"ride": 0.45, "ride_bell": 0.45, "chick": -0.4, "hat_open": -0.4, "crash": -0.25, "kick": 0,
+       "snare": -0.08, "rim": -0.08, "tom_hi": -0.2, "tom_mid": 0.15, "tom_floor": 0.35, "swell": 0.3}
+
+
+def hit(bus, t0, name, vel=1.0, jitter=0.006):
+    t0 += rng.normal(0, jitter)
+    vel *= 1 + rng.normal(0, 0.1)
+    i = int(max(0, t0) * SR)
     if i >= bus.shape[1]:
         return
-    sig = sig[: bus.shape[1] - i]
-    a = (pan + 1) * np.pi / 4
-    bus[0, i:i + len(sig)] += sig * np.cos(a) * gain
-    bus[1, i:i + len(sig)] += sig * np.sin(a) * gain
+    sig = KIT[name][: bus.shape[1] - i] * vel
+    a = (PAN[name] + 1) * np.pi / 4
+    bus[0, i:i + len(sig)] += sig * np.cos(a)
+    bus[1, i:i + len(sig)] += sig * np.sin(a)
 
 
-def taiko(heavy=True):
-    t = t_axis(2.2 if heavy else 1.2)
-    f = 42 + 70 * np.exp(-t / 0.07)                      # pitch drop: the "dum"
-    body = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t / (0.55 if heavy else 0.3))
-    skin = lp(rng.standard_normal(len(t)), 1800) * np.exp(-t / 0.03) * 0.6
-    sub = np.sin(2 * np.pi * 36.7 * t) * np.exp(-t / 0.9) * (0.7 if heavy else 0)
-    return np.tanh(1.8 * (body + skin + sub)) * (1.0 if heavy else 0.6)
-
-
-def braam(chord_hz, sec=4.5, bright=3200):
-    """Stacked detuned saws, filter snaps open then closes, saturated."""
+def room_ir(sec=0.9):
     t = t_axis(sec)
-    x = sum(saw(f, t, d) for f in chord_hz for d in (-0.004, 0, 0.005))
-    x /= len(chord_hz) * 3
-    env = np.minimum(t / 0.02, 1) * np.exp(-t / (sec / 3))
-    # time-varying filter by crossfading a dark and a bright render
-    mix = np.exp(-t / 0.35)
-    x = lp(x, 260) * (1 - mix) + lp(x, bright) * mix
-    return np.tanh(2.5 * x * env)
-
-
-def pluck(f, sec=EIGHTH * 1.6):
-    t = t_axis(sec)
-    x = 0.6 * saw(f, t) + 0.4 * saw(f, t, 0.006)
-    return lp(x, 1300) * np.minimum(t / 0.004, 1) * np.exp(-t / 0.13)   # dark: leave 1-4 kHz to the voice
-
-
-def tick():
-    t = t_axis(0.05)
-    return hp(rng.standard_normal(len(t)), 5000) * np.exp(-t / 0.008)
-
-
-def thump():
-    t = t_axis(0.35)
-    f = 40 + 25 * np.exp(-t / 0.04)
-    return np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t / 0.12)
-
-
-def reverb_ir(sec=2.4):
-    t = t_axis(sec)
-    ir = np.stack([lp(rng.standard_normal(len(t)), 5200) * np.exp(-t / 0.55) for _ in range(2)])
+    ir = np.stack([lp(rng.standard_normal(len(t)), 7000) * np.exp(-t / 0.18) for _ in range(2)])
     ir[:, 0] = 0
-    return ir / np.abs(ir).sum(axis=1, keepdims=True).max() * 30
+    return ir / np.abs(ir).sum(axis=1, keepdims=True).max() * 12
 
 
-# ------------------------------------------------------------------ score
+# ------------------------------------------------------------------ the drummer
+def groove(bus, a, b, busy_at, end_fill=True):
+    """Swing time from a to b, stretched so b lands on a downbeat. busy_at(t) -> 0..1."""
+    beats = max(1, round((b - a) / (60 / TEMPO)))
+    beat = (b - a) / beats
+    fill_from = beats - (2 if beats >= 6 else 1) if end_fill else beats
+    for k in range(beats):
+        t = a + k * beat
+        if k >= fill_from:                                   # fill into the anchor: triplets around the kit
+            seq = ["tom_hi", "tom_hi", "tom_mid", "tom_mid", "tom_floor", "tom_floor"]  # toms: below the voice band
+            for j in range(3):
+                n = seq[min(len(seq) - 1, (k - fill_from) * 3 + j)]
+                hit(bus, t + j * beat / 3, n, 0.4 + 0.25 * j / 2)
+            continue
+        busy = busy_at(t)
+        if k % 16 == 15 and k < fill_from - 4:                 # pickup every 4 bars in long stretches
+            hit(bus, t + SWING * beat, "snare", 0.4); hit(bus, t + SWING * beat, "tom_mid", 0.35 * busy)
+        hit(bus, t, "ride", 0.55 if k % 2 == 0 else 0.42)     # ding
+        if k % 2 == 1:
+            hit(bus, t, "chick", 0.5)                        # hi-hat on 2 and 4
+            hit(bus, t + SWING * beat, "ride", 0.33)         # the swung "a"
+        hit(bus, t, "kick", 0.12)                            # feathered kick
+        r = rng.random()                                     # comping on the swung 8th or the beat
+        if r < 0.10 * busy:
+            hit(bus, t + SWING * beat, "snare", 0.55)
+        elif r < 0.45 * busy:
+            hit(bus, t + SWING * beat, "snare", 0.14)        # ghost note
+        if rng.random() < 0.05 * busy:
+            hit(bus, t, "kick", 0.7)                         # a bomb
+        if rng.random() < 0.04 * busy:
+            hit(bus, t, "rim", 0.35)
+
+
 def compose(events, dur):
+    build_kit()
     slams = [(t, x) for t, s, x in events if s == "Slam"]
     cards = sorted({round(t, 2) for t, s, _ in events if s == "Card"})
     stamp, tres, cierto = cards[0], cards[-2], cards[-1]
+    t_40 = slams[-1][0]
     t_triunfar = next(t for t, x in slams if "TRIUNF" in x)
-    t_40, t_jug = slams[-1][0], next(t for t, x in slams if "JUGUETE" in x)
+    t_jug = next(t for t, x in slams if "JUGUETE" in x)
     t_meses = next(t for t, x in slams if "MESES" in x)
 
-    total = dur + 4
-    dry = np.zeros((2, int(total * SR)))     # percussion, ticks: mostly dry
-    wet = np.zeros((2, int(total * SR)))     # tonal parts: through the reverb
+    bus = np.zeros((2, int((dur + 4) * SR)))
 
-    # 1. drone (D1 + A1 + D2), dark under the hook, opening up act by act
-    t = t_axis(total)
-    drone = sum(saw(f, t, d) for f in (hz("D", 1), hz("A", 1), hz("D", 2)) for d in (-0.003, 0.003)) / 6
-    dark, bright = lp(drone, 160, 4), lp(drone, 700, 4)
-    open_ = np.interp(t, [0, stamp, t_jug, t_meses, t_triunfar, t_triunfar + 1.5, t_40, cierto, total],
-                      [0, 0.1, 0.35, 0.6, 1.0, 0.2, 0.0, 0.3, 0.0])
-    level = np.interp(t, [0, 1.5, t_triunfar + 1, t_triunfar + 2.5, t_40 - 3.5, t_40, tres, tres + 0.2, cierto, dur, total],
-                      [0, 0.55, 0.85, 0.35, 0.35, 0.9, 0.9, 0.0, 0.0, 0.0, 0.0])
-    sub = np.sin(2 * np.pi * hz("D", 1) * t) * 0.5
-    d = (dark * (1 - open_) + bright * open_ + sub) * level * 0.5
-    wet[0] += d; wet[1] += d
+    # silence under the hook (MARKETING lands dry); the drums enter on the stamp card
+    hit(bus, stamp, "kick", 1.0, 0); hit(bus, stamp, "crash", 0.9, 0)
 
-    # 2. clock ticks under the hook and the first act
-    k = 0.0
-    while k < min(t_jug, 20.0):
-        if not (stamp - 0.3 < k < stamp + 1.9):
-            place(dry, k, tick(), pan=0.5 if int(k / BEAT) % 2 else -0.5, gain=0.18)
-        k += BEAT
+    # time from the stamp to TRIUNFAR, anchored on every slam word in between
+    anchors = [stamp + 1.8] + [t for t, _ in slams if stamp + 2 < t < t_triunfar] + [t_triunfar]
+    hit(bus, anchors[0], "ride_bell", 0.6, 0)
+    for a, b in zip(anchors, anchors[1:]):
+        groove(bus, a, b, lambda x: float(np.interp(x, [stamp, t_jug, t_meses, t_triunfar], [0.2, 0.55, 0.85, 1.0])))
+        heavy = not any(abs(b - t) < 0.01 and "5 MIN" in x for t, x in slams)
+        hit(bus, b, "kick", 1.0 if heavy else 0.7, 0)
+        hit(bus, b, "crash" if heavy else "snare", 0.8 if heavy else 0.6, 0)
 
-    # 3. ostinato: 8ths from after the stamp to TRIUNFAR, thickening
-    def chord_at(x):
-        if x < t_jug:
-            return "Dm"
-        if x < t_triunfar - 4 * BAR:
-            return ["Dm", "Bb", "F", "C"][int((x - t_jug) / (2 * BAR)) % 4]
-        return ["Bb", "C", "Dm", "A"][min(3, int((x - (t_triunfar - 4 * BAR)) / BAR))]
+    # TRIUNFAR: the biggest crash, then the floor drops out
+    hit(bus, t_triunfar, "crash", 1.0, 0); hit(bus, t_triunfar + 0.02, "tom_floor", 0.8, 0)
 
-    pattern = [0, 2, 1, 2, 0, 2, 1, 2]                    # root-fifth-third-fifth
-    x, i = stamp + 1.9, 0
-    while x < t_triunfar:
-        root, tones = CHORDS[chord_at(x)]
-        oct_ = 3
-        f = hz(tones[pattern[i % 8]], oct_)
-        gain = np.interp(x, [stamp, t_jug, t_meses, t_triunfar], [0.18, 0.28, 0.38, 0.55])
-        place(wet, x, pluck(f), pan=-0.35 if i % 2 else 0.35, gain=gain)
-        if x > t_meses:                                   # octave layer joins after 3 MESES
-            place(wet, x, pluck(f * 2), pan=0.6 if i % 2 else -0.6, gain=gain * 0.3)
-        if i % 8 == 0 and x > t_jug:                      # bass note per bar
-            place(wet, x, lp(saw(hz(root, 1), t_axis(BAR)), 220) * np.exp(-t_axis(BAR) / 1.2), gain=0.5)
-        x += EIGHTH; i += 1
+    # cliffhanger: a lone hi-hat like a clock, then a floor-tom rumble + cymbal swell into 40 AÑOS
+    # (a snare roll would sit on "no ha cambiado en 40 años"; toms and cymbal leave the voice band free)
+    roll_start = t_40 - 3.0
+    t = t_triunfar + 2.2
+    while t < roll_start:
+        hit(bus, t, "chick", 0.45)
+        t += 60 / 132
+    n = int(3.0 / 0.05)
+    for j in range(n):
+        x = j / n
+        hit(bus, roll_start + j * 0.05, "tom_floor", 0.06 + 0.6 * x ** 2.2, 0.003)
+    hit(bus, t_40 - 3.0, "swell", 0.3, 0)
+    hit(bus, t_40, "kick", 1.0, 0); hit(bus, t_40, "crash", 1.0, 0); hit(bus, t_40, "tom_floor", 0.9, 0)
 
-    # 4. low toms on beats 1 and 3 once the challengers arrive
-    x = t_jug + BAR
-    while x < t_triunfar - 0.2:
-        place(dry, x, taiko(heavy=False), gain=0.35)
-        x += 2 * BEAT
+    # "Tres años después" in silence; a cymbal swell into "¿Sigue siendo cierto?", one last hit
+    hit(bus, cierto - 3.0, "swell", 0.35, 0)
+    hit(bus, cierto, "kick", 1.0, 0); hit(bus, cierto, "crash", 1.0, 0); hit(bus, cierto, "rim", 0.7, 0)
 
-    # 5. hits on the slam words (40 AÑOS gets the braam instead)
-    for ts_, word in slams[:-1]:
-        heavy = word not in ("5 MINUTOS",)
-        place(dry, ts_ - 0.03, taiko(heavy), gain=0.95 if heavy else 0.6)
-    place(dry, t_triunfar - 0.03, taiko(True), gain=1.0)
-    place(wet, t_triunfar - 0.03, braam([hz("A#", 1), hz("F", 2), hz("A#", 2), hz("D", 3)], 3.0), gain=0.55)
-
-    # 6. stamp: THE DATA PUB · JULIO 2023
-    place(wet, stamp - 0.02, braam([hz("D", 1), hz("A", 1), hz("D", 2), hz("F", 3)], 3.2), gain=0.75)
-    place(dry, stamp - 0.02, taiko(True), gain=0.9)
-
-    # 7. cliffhanger: heartbeat + riser into 40 AÑOS
-    x = t_triunfar + 2.5
-    while x < t_40 - 0.6:
-        place(dry, x, thump(), gain=0.7); place(dry, x + 0.28, thump(), gain=0.45)
-        x += 0.95
-    rt = t_axis(4.0)
-    # the riser runs under "no ha cambiado en 40 años": air above 3 kHz plus a low rising tone, no mid-band noise
-    riser = bp(rng.standard_normal(len(rt)), 3200, 9000) * (rt / 4) ** 2.5
-    riser += np.sin(2 * np.pi * np.cumsum(55 * 2 ** (rt / 2)) / SR) * (rt / 4) ** 3 * 0.5
-    place(wet, t_40 - 4.0, riser, gain=0.3)
-    place(wet, t_40 - 0.02, braam([hz("D", 1), hz("A", 1), hz("D", 2), hz("A", 2), hz("F", 3)], 4.0, 4200), gain=1.0)
-    place(dry, t_40 - 0.02, taiko(True), gain=1.0)
-
-    # 8. "¿Sigue siendo cierto?": the last braam, unresolved (A major over D), rings out
-    place(wet, cierto - 0.02, braam([hz("D", 1), hz("A", 1), hz("C#", 3), hz("E", 3), hz("A", 3)], 5.0, 3800), gain=0.9)
-    place(dry, cierto - 0.02, taiko(True), gain=0.9)
-
-    ir = reverb_ir()
-    rev = np.stack([fftconvolve(wet[c], ir[c])[: wet.shape[1]] for c in range(2)])
-    out = dry + 0.75 * wet + 0.35 * rev
-    out = out[:, : int(dur * SR)]
-    fade = np.minimum(1, (dur - t_axis(dur)) / 0.6)       # last 0.6 s fades to silence
-    out *= fade
-    out = np.tanh(out / max(1e-9, np.abs(out).max()) * 1.3) * 0.89
+    ir = room_ir()
+    room = np.stack([fftconvolve(bus[c], ir[c])[: bus.shape[1]] for c in range(2)])
+    out = (bus + 0.3 * room)[:, : int(dur * SR)]
+    out *= np.minimum(1, (dur - t_axis(dur)) / 0.6)          # last 0.6 s fades out
+    out = np.tanh(out / max(1e-9, np.abs(out).max()) * 1.2) * 0.89
     return out.T
 
 
