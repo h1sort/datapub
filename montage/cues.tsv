@@ -1,14 +1,35 @@
-label	start	end	caption
-titulo	3:55.6	4:05.0	El de enfrente es DuckDB. // La plática: "Modern Data Stack, // o la virtud inesperada de la ignorancia"
-birdman	10:57.4	11:11.6	Hoy se parece a cómo se enfrentan estos dos papeles. // De un lado, Riggan, con DuckDB. // Del otro, Mike Shiner, con Spark.
-anadirle	15:17.0	15:25.0	Entonces el diagrama es: ¿puedes solo añadirle…? // Tu pregunta puede ser fácil o muy, muy difícil.
-anadirle	15:56.8	16:05.6	Métricas A y B: ¿cuánto tarda? // Yo diría que 5 minutos: // ya tenemos un tablero.
-anadirle	17:29.6	17:35.9	Y si B está en un sistema fuente… // no lo veo en menos de 3 meses y 5 personas más.
-nokia	21:38.0	21:43.8	El Nokia N95 tenía una cámara de 5 megapíxeles.
-nokia	21:50.5	21:57.0	El siguiente: el iPhone de primera generación, // 2 megapíxeles.
-nokia	22:18.2	22:23.8	Lo moderno no es lo más avanzado. // La tecnología no avanza de forma lineal.
-retadores	31:58.4	32:07.0	¿Alguien usa Hadoop? // La razón por la que nadie lo usa // es porque luego vino Spark.
-retadores	33:36.3	33:45.0	Hannes Mühleisen propuso DuckDB: // cómputo en un solo nodo, con interfaz SQL.
-retadores	33:54.0	34:03.4	Ahora el establecido es Spark. // Y el challenger, usado otra vez en casos juguete, // es DuckDB.
-marketing	43:06.6	43:15.6	La realidad que nadie les va a decir, // y esta es mi opinión: // esto es marketing.
-cierre	45:14.6	45:25.6	Cualquier persona, incluso quien apenas comienza, // puede tomar todas las decisiones erróneas // al montar su stack, // y aun así, yo argumento, puede triunfar.
+# Edit decision list for montage/out/anteriormente.mp4 (v2). Read by build.py and captions.py.
+# Times are m:ss.xx in montage/src/2023.mp4. In/out points sit in silences found on the
+# audio envelope (not on whisper word times, which drift up to ~0.4 s in this recording).
+# shots: " | "-separated framing changes; the first starts at `in`, the rest at their time.
+#   mode: comp (black composite: Carlos panel + slide) | face (Carlos punch-in) | slide | wide
+#   zoom: "1.0" static, "a>b" slow push over the shot, "a~b" snap zoom (fast ease) to b
+#   @x,y viewport centre (0-1 of the plate); fy=N top row of the face crop; dx=N slide crop offset
+# card rows: in=card, out=duration (s), shots=key=value;… (kind=stamp | q2026)
+# sfx: hit@T[:dB]  (T = source time for clips, seconds from the card start for cards)
+id	in	out	shots	sfx	beat
+hook	43:06.55	43:12.40	comp 1.0>1.03 | 43:08.38 face 1.0>1.07 @.55,.4 | 43:10.62 slide 1.2~1.4 @.5,.58	hit@43:10.80:-14	esto es marketing
+stamp	card	1.8	kind=stamp	hit@0:-8	título
+titulo	3:58.60	4:02.42	comp 1.0>1.03 | 4:00.30 slide 1.9~2.0 @.745,.85 dx=20 cap=170		la virtud inesperada de la ignorancia
+riggan	9:50.30	9:55.80	slide 1.25>1.4 @.33,.45 | 9:53.35 face 1.05~1.15 @.55,.38		Riggan: papeles de juguete
+lados	11:05.05	11:13.55	slide 1.0>1.06 @.5,.5 | 11:07.70 slide 1.4~1.5 @.31,.54 | 11:10.25 slide 1.4~1.5 @.73,.52		DuckDB vs Spark
+nokia	21:40.15	21:43.35	slide 1.0>1.05 | 21:42.12 slide 2.0~2.3 @.63,.8 cap=170		Nokia N95 5 MP
+iphone	21:51.08	21:56.75	slide 1.0>1.06 | 21:53.45 slide 1.6~1.8 @.68,.62 | 21:55.90 slide 2.4~2.7 @.68,.83 cap=170		iPhone 2 MP
+moderno	22:19.25	22:21.40	face 1.05>1.12 @.55,.35		lo moderno no es lo más avanzado
+hadoop	31:58.38	32:00.20	slide 1.0>1.1 @.5,.5		¿alguien usa Hadoop?
+duckdb	33:54.12	34:03.95	slide 1.0>1.05 | 33:56.20 face 1.0>1.06 @.55,.4 | 33:59.25 slide 1.8~2.1 @.31,.47 | 34:00.00 face 1.06>1.12 @.55,.38 | 34:03.20 slide 2.0~2.4 @.31,.47		DuckDB, el retador de juguete
+anadir	15:19.06	15:23.75	slide 1.6~1.7 @.8,.2 dx=20		¿puedes añadirle solo…?
+cinco	15:57.30	16:00.10	slide 1.0>1.05 | 15:58.95 slide 2.2~2.5 @.9,.55		5 minutos
+meses	17:31.05	17:35.15	slide 1.0>1.05 | 17:33.25 slide 2.6~2.9 @.1,.55		3 meses y 5 personas
+migra1	5:52.75	5:54.74	comp 1.0>1.03		migración de stack
+migra2	5:56.72	6:00.78	face 1.0>1.08 @.55,.4 | 5:59.62 face 1.18~1.3 @.55,.35		es horrible
+nuevo	57:29.95	57:34.85	face 1.0>1.06 @.38,.3 fy=182 | 57:32.85 comp 1.0>1.03		no migres porque es nuevo
+anos	58:53.90	59:00.95	comp 1.0>1.03 | 58:57.60 face 1.0>1.05 @.55,.3 fy=182 | 58:58.40 face 1.2~1.3 @.55,.3 fy=182		3 años on-prem → Snowflake
+obra	44:56.50	45:01.30	slide 1.0>1.06 @.5,.4 | 45:00.30 face 1.1~1.2 @.55,.35		Riggan tomó todas las decisiones erróneas
+triunfo	45:06.95	45:08.05	slide 1.6~1.8 @.48,.73		aún así triunfó
+datadev	45:11.82	45:13.00	face 1.0>1.05 @.55,.4		un data dev
+puede	45:18.30	45:25.05	slide 1.0>1.06 @.5,.45 | 45:20.70 slide 2.0~2.3 @.85,.58 | 45:21.85 slide 1.15>1.25 @.5,.5 | 45:24.35 slide 2.6~3.0 @.77,.9 cap=965		puede triunfar
+idea	53:12.30	53:16.00	comp 1.0>1.03		la idea general del stack
+raiz	53:42.60	53:48.40	face 1.0>1.06 @.6,.3 fy=182 | 53:47.80 face 1.15~1.3 @.47,.3 fy=182		no ha cambiado en 40 años
+tres	card	1.5	kind=q2026;text=Tres años después.	hit@0:-8	2026
+cierto	card	2.8	kind=q2026;text=¿Sigue siendo cierto?;accent=1;size=160		2026

@@ -80,7 +80,7 @@
     {
       id: 'cold-open',
       title: '[M] Anteriormente en The Data Pub…',
-      time: 100,
+      time: 110,
       class: 'bleed',
       particles: 'none',
       label: '',
@@ -96,11 +96,12 @@
         </div>`,
       steps: 1,
       notes: `
-        <p class="dir">[Pantalla negra. Esperar a que la sala se calle. Un clic: arranca el montaje de ~2 min. Si el video no carga, aparecen 5 stills con su frase, cada ~7 s; hablar encima.]</p>
-        <p>Antes de empezar: "anteriormente en The Data Pub". Así como en las series, un recap. Hace tres años, en julio de 2023, estuve en este mismo evento con una plática que se llamaba "Modern Data Stack: la virtud inesperada de la ignorancia".</p>
-        <p>Les dejo dos minutos de lo que dije entonces: Birdman, un Nokia contra un iPhone, Hadoop, Spark, DuckDB, y un ejemplo mínimo que nos tomó tres meses. Y, bueno, también la frase que me persigue: "esto es marketing".</p>
-        <p>Si sale mal el video, no pasa nada, ya me conocen, se los cuento yo. Lo importante es que me acuerden en 2023 y luego me juzguen.</p>
-        <p class="dir">[Al terminar el video: un clic.] Y ahora sí: episodio dos.</p>`,
+        <p class="dir">[Pantalla negra. Esperar a que la sala se calle. Un clic: arranca el recap (1:45). No hablar encima: abre con "esto es marketing" y cierra en "¿Sigue siendo cierto?", que se queda en pantalla. Si el video no carga, aparecen 5 stills con su frase, cada ~7 s; hablar encima.]</p>
+        <p class="dir">[El recap: marketing · la virtud de la ignorancia · Riggan vs. Mike (DuckDB vs. Spark) · Nokia vs. iPhone · "¿Puedes solo añadirle…?" 5 minutos / 3 meses · migrar es horrible, 3 años a Snowflake · "puede triunfar" · el stack "no ha cambiado en 40 años".]</p>
+        <p>Ese tipo tan seguro de sí mismo era yo. Hace tres años, en este mismo escenario.</p>
+        <p>Les dije que el Modern Data Stack era marketing, que DuckDB era un juguete y que migrar cuesta años. Y cerré con que el stack no ha cambiado en 40 años.</p>
+        <p>Spoiler: algo sí cambió. Pero no fue el stack. Hoy me toca calificarme en voz alta, y no todas las salvo.</p>
+        <p class="dir">[Un clic.] Y ahora sí: episodio dos.</p>`,
       onEnter(el, ctx) {
         const st = el._a0 = { failed: false, timer: null, v: el.querySelector('video'), fb: el.querySelector('.a0-fb'), step: 0 };
         const fail = () => {
@@ -147,7 +148,7 @@
     {
       id: 'quien',
       title: 'who_is_this_dude?',
-      time: 50,
+      time: 40,
       class: 'middle',
       particles: { shape: 'scatter', opacity: 0.2 },
       html: `

@@ -7,3 +7,4 @@ __pycache__/
 .venv/
 montage/work/
 deck/.shots/
+__pycache__/

@@ -1,0 +1,303 @@
+# Word-level captions for the recap (hand-corrected from work/words-raw.tsv; see captions.py).
+# start/end = seconds in montage/src/2023.mp4. mark: / new group, * slam group, + joins slam.
+clip	start	end	word	mark
+hook	2586.550	2587.130	La	/
+hook	2587.130	2587.430	realidad	
+hook	2587.430	2587.610	que	/
+hook	2587.610	2587.790	nadie	
+hook	2587.790	2587.950	les	/
+hook	2587.950	2588.050	va	
+hook	2588.050	2588.070	a	
+hook	2588.070	2588.330	decir,	
+hook	2588.410	2588.570	y	/
+hook	2588.570	2588.690	yo	
+hook	2588.690	2588.910	sí,	
+hook	2589.130	2589.190	y	/
+hook	2589.190	2589.350	esta	
+hook	2589.350	2589.410	es	
+hook	2589.410	2589.490	mi	/
+hook	2589.490	2589.870	opinión,	
+hook	2590.370	2590.490	es	/
+hook	2590.490	2590.530	que	
+hook	2590.530	2590.630	esto	
+hook	2590.630	2590.710	es	
+hook	2590.710	2591.010	marketing.	*
+titulo	238.600	239.140	La	/
+titulo	239.140	239.380	plática	
+titulo	239.380	239.560	se	/
+titulo	239.560	239.680	llama	
+titulo	239.680	239.880	Modern	/
+titulo	239.880	240.020	Data	
+titulo	240.020	240.380	Stack,	
+titulo	240.380	240.500	o	/
+titulo	240.500	240.620	la	
+titulo	240.620	240.880	virtud	
+titulo	240.880	241.360	inesperada	/
+titulo	241.360	241.460	de	/
+titulo	241.460	241.540	la	
+titulo	241.540	242.040	ignorancia.	
+riggan	590.300	590.740	Riggan	/
+riggan	590.740	590.940	tiene	
+riggan	590.940	591.180	gran	/
+riggan	591.180	591.580	promesa	
+riggan	591.580	592.100	y	/
+riggan	592.100	592.500	fama	
+riggan	592.500	592.600	en	/
+riggan	592.600	593.380	papeles	
+riggan	593.380	593.540	de	/
+riggan	593.540	594.060	juguete	
+riggan	594.060	594.320	o	/
+riggan	594.320	594.820	papeles	
+riggan	594.820	595.280	poco	/
+riggan	595.280	595.700	serios.	
+lados	665.050	665.310	De	/
+lados	665.310	665.410	un	
+lados	665.410	665.570	lado	
+lados	665.570	665.830	tenemos	/
+lados	665.830	666.070	a	
+lados	666.070	666.350	Riggan	
+lados	666.350	667.130	representando,	/
+lados	667.250	667.450	bueno,	/
+lados	667.630	667.750	su	
+lados	667.750	668.010	carita	
+lados	668.010	668.230	tiene	/
+lados	668.230	668.310	a	
+lados	668.310	668.550	DuckDB	
+lados	668.550	668.950	enfrente.	/
+lados	669.590	669.630	Y	/
+lados	669.630	669.690	del	
+lados	669.690	669.810	otro	
+lados	669.810	669.950	lado	
+lados	669.950	670.170	tenemos	/
+lados	670.170	670.310	a	
+lados	670.310	670.450	Mike	/
+lados	670.450	670.790	Shiner,	
+lados	670.950	671.470	teniendo	/
+lados	671.470	671.690	a	
+lados	671.690	671.870	Spark	
+lados	671.870	672.410	representado	/
+lados	672.410	672.650	también	/
+lados	672.650	672.810	ahí	
+lados	672.810	673.090	enfrente.	
+nokia	1300.150	1300.390	Es	/
+nokia	1300.390	1300.490	el	
+nokia	1300.490	1300.650	Nokia	
+nokia	1300.650	1301.330	N95,	
+nokia	1301.670	1301.790	tiene	/
+nokia	1301.790	1301.950	una	
+nokia	1301.950	1302.150	cámara	
+nokia	1302.150	1302.310	de	/
+nokia	1302.310	1302.550	5	
+nokia	1302.550	1303.170	megapíxeles.	
+iphone	1311.080	1311.240	El	/
+iphone	1311.240	1311.620	siguiente	
+iphone	1311.620	1311.980	celular	
+iphone	1311.980	1312.120	no	/
+iphone	1312.120	1312.240	es	
+iphone	1312.240	1312.440	nada	
+iphone	1312.440	1312.600	más	
+iphone	1312.600	1312.780	y	/
+iphone	1312.780	1313.000	nada	
+iphone	1313.000	1313.300	menos	
+iphone	1313.300	1313.500	que	/
+iphone	1313.500	1313.680	el	
+iphone	1313.680	1313.920	iPhone,	
+iphone	1314.140	1314.300	primera	/
+iphone	1314.300	1314.900	generación.	
+iphone	1315.140	1315.460	Tiene	/
+iphone	1315.460	1315.600	una	
+iphone	1315.600	1315.820	cámara	
+iphone	1315.820	1315.960	de	
+iphone	1315.960	1316.080	2	/
+iphone	1316.080	1316.620	megapíxeles.	
+moderno	1339.250	1339.570	Lo	/
+moderno	1339.570	1340.050	moderno	
+moderno	1340.050	1340.170	no	/
+moderno	1340.170	1340.330	es	
+moderno	1340.330	1340.430	lo	/
+moderno	1340.430	1340.630	más	
+moderno	1340.630	1341.130	avanzado.	
+hadoop	1918.380	1918.920	¿Alguien	/
+hadoop	1918.920	1919.040	usa	
+hadoop	1919.040	1919.340	Hadoop?	
+duckdb	2034.120	2034.480	Ahora	/
+duckdb	2034.480	2034.560	el	
+duckdb	2034.560	2034.980	establecido	
+duckdb	2034.980	2035.080	es	/
+duckdb	2035.080	2035.360	Spark,	
+duckdb	2035.800	2036.220	y	/
+duckdb	2036.220	2036.380	quien	
+duckdb	2036.380	2036.580	viene	
+duckdb	2036.580	2036.780	como	/
+duckdb	2036.780	2037.300	challenger,	
+duckdb	2037.440	2037.540	que	/
+duckdb	2037.540	2037.700	está	
+duckdb	2037.700	2037.920	siendo	
+duckdb	2037.920	2038.280	usado	
+duckdb	2038.280	2038.580	otra	/
+duckdb	2038.580	2038.880	vez	
+duckdb	2038.880	2039.040	en	/
+duckdb	2039.040	2039.320	casos	
+duckdb	2039.320	2039.900	juguete	*
+duckdb	2039.900	2040.080	y	/
+duckdb	2040.080	2040.200	que	
+duckdb	2040.200	2040.300	no	
+duckdb	2040.300	2040.560	sabemos	
+duckdb	2040.560	2040.740	si	/
+duckdb	2040.740	2040.920	puede	
+duckdb	2040.920	2041.100	hacer	/
+duckdb	2041.100	2041.880	algo	
+duckdb	2041.880	2041.980	en	/
+duckdb	2041.980	2042.320	producción,	
+duckdb	2042.680	2043.320	es	
+duckdb	2043.320	2043.600	DuckDB.	/
+anadir	919.060	919.340	¿Puedes	/
+anadir	919.340	919.760	añadirle	
+anadir	919.760	920.000	solo…?	
+anadir	920.500	921.020	Porque	/
+anadir	921.020	921.140	tu	
+anadir	921.140	921.380	pregunta	
+anadir	921.380	921.600	puede	/
+anadir	921.600	921.780	ser	
+anadir	921.780	922.040	fácil	
+anadir	922.040	922.200	o	/
+anadir	922.200	922.340	muy,	
+anadir	922.340	922.480	muy	
+anadir	922.480	922.700	difícil	
+anadir	922.700	922.920	de	/
+anadir	922.920	923.260	responder.	
+cinco	957.300	958.020	Yo	/
+cinco	958.020	958.300	diría…	
+cinco	959.060	959.620	5	*
+cinco	959.660	959.900	minutos.	+
+meses	1051.050	1051.370	Ok,	/
+meses	1051.630	1051.810	yo	
+meses	1051.810	1051.930	no	
+meses	1051.930	1052.090	veo	
+meses	1052.090	1052.410	pasar	/
+meses	1052.410	1052.690	esto	
+meses	1052.690	1052.970	en	/
+meses	1052.970	1053.170	menos	
+meses	1053.170	1053.310	de	
+meses	1053.310	1053.470	3	*
+meses	1053.470	1053.730	meses	+
+meses	1053.730	1053.910	y	/
+meses	1053.910	1054.130	cinco	
+meses	1054.130	1054.350	más	
+meses	1054.350	1054.710	personas.	
+migra1	352.750	352.950	No	/
+migra1	352.950	353.090	sé	
+migra1	353.090	353.310	quién	
+migra1	353.310	353.490	sí	
+migra1	353.490	353.670	haya	/
+migra1	353.670	353.890	hecho	
+migra1	353.890	354.010	una	/
+migra1	354.010	354.350	migración	
+migra1	354.350	354.450	de	/
+migra1	354.450	354.710	stack.	
+migra2	356.720	357.180	Quien	/
+migra2	357.180	357.320	sí	
+migra2	357.320	357.420	lo	
+migra2	357.420	357.540	haya	
+migra2	357.540	357.820	hecho,	
+migra2	358.000	358.080	lo	/
+migra2	358.080	358.560	compadezco	
+migra2	358.560	358.640	y	/
+migra2	358.640	359.060	lo	
+migra2	359.060	359.380	abrazo.	
+migra2	359.660	360.200	Es	/
+migra2	360.200	360.440	horrible.	*
+nuevo	3449.950	3450.470	No	/
+nuevo	3450.470	3450.990	creo	
+nuevo	3450.990	3451.110	que	
+nuevo	3451.110	3451.450	sea	/
+nuevo	3451.450	3452.190	buena	
+nuevo	3452.190	3452.450	idea	
+nuevo	3452.450	3452.890	migrar	/
+nuevo	3452.890	3454.010	porque	/
+nuevo	3454.010	3454.170	es	
+nuevo	3454.170	3454.350	nuevo.	
+anos	3533.780	3534.220	El	/
+anos	3534.220	3534.460	plan	
+anos	3534.460	3534.560	de	/
+anos	3534.560	3534.880	migración	
+anos	3534.880	3535.100	más	/
+anos	3535.100	3535.580	corto	
+anos	3535.580	3535.820	de	/
+anos	3535.820	3536.020	una	
+anos	3536.020	3536.260	base	
+anos	3536.260	3536.320	de	
+anos	3536.320	3536.500	datos	
+anos	3536.500	3536.880	on-prem	/
+anos	3536.880	3537.640	a	/
+anos	3537.640	3538.160	Snowflake	
+anos	3538.160	3538.380	es	/
+anos	3538.380	3538.460	de	
+anos	3538.460	3538.580	3	*
+anos	3538.580	3538.900	años	+
+anos	3540.000	3540.440	en	/
+anos	3540.440	3540.600	este	
+anos	3540.600	3540.800	caso.	
+obra	2696.500	2696.980	Riggan	/
+obra	2696.980	2697.300	tomó	
+obra	2697.300	2697.560	todas	/
+obra	2697.560	2697.740	las	
+obra	2697.740	2698.240	decisiones	
+obra	2698.240	2698.780	erróneas	/
+obra	2698.780	2698.980	al	/
+obra	2698.980	2699.260	momento	
+obra	2699.260	2699.380	de	/
+obra	2699.380	2699.660	montar	
+obra	2699.660	2699.760	su	
+obra	2699.760	2700.000	obra.	
+obra	2700.380	2700.940	Todas.	/
+triunfo	2707.180	2707.360	Aún	/
+triunfo	2707.360	2707.500	así	
+triunfo	2707.500	2707.880	triunfó.	/
+datadev	2711.820	2712.040	Un	/
+datadev	2712.040	2712.300	data	
+datadev	2712.300	2712.580	dev,	
+puede	2718.300	2718.960	Puede	/
+puede	2718.960	2719.180	tomar	
+puede	2719.180	2719.400	todas	/
+puede	2719.400	2719.540	las	
+puede	2719.540	2719.880	decisiones	
+puede	2719.880	2720.240	erróneas	/
+puede	2720.240	2720.340	al	/
+puede	2720.340	2720.600	momento	
+puede	2720.600	2720.740	de	/
+puede	2720.740	2721.020	montar	
+puede	2721.020	2721.140	su	
+puede	2721.140	2721.360	stack.	
+puede	2721.880	2722.360	Y	/
+puede	2722.360	2722.520	aún	
+puede	2722.520	2722.760	así,	
+puede	2723.220	2723.440	yo	/
+puede	2723.440	2723.960	argumento	
+puede	2723.960	2724.440	que	/
+puede	2724.440	2724.600	puede	
+puede	2724.600	2724.900	triunfar.	*
+idea	3192.300	3193.100	Se	/
+idea	3193.100	3193.340	sigue	
+idea	3193.340	3193.920	manteniendo	/
+idea	3193.920	3194.060	la	/
+idea	3194.060	3194.320	idea	
+idea	3194.320	3195.240	general	
+idea	3195.240	3195.460	del	/
+idea	3195.460	3195.680	stack.	
+raiz	3222.600	3223.020	Va	/
+raiz	3223.020	3223.100	a	
+raiz	3223.100	3223.240	ser	
+raiz	3223.240	3223.840	interesante	
+raiz	3224.620	3225.080	si	/
+raiz	3225.080	3225.340	esto	
+raiz	3225.340	3225.900	cambia	
+raiz	3225.900	3225.980	de	/
+raiz	3225.980	3226.300	raíz,	
+raiz	3226.880	3227.340	pero	/
+raiz	3227.340	3227.500	no	
+raiz	3227.500	3227.560	ha	
+raiz	3227.560	3227.760	cambiado	
+raiz	3227.760	3227.880	en	/
+raiz	3227.880	3228.140	40	*
+raiz	3228.140	3228.320	años.	+

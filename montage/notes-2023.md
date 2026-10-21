@@ -41,6 +41,10 @@ Slide "Un ejemplo mínimo" (desde ~13:07). Sitio de gestión de proyectos tipo L
 - Marketing (42:06–43:20): Amit Prakash, "¿qué hace que un software sea parte del MDS?" (easy to try/deploy, massive scalability, composable). "La realidad que nadie les va a decir… esto es marketing" 43:06–43:11; sello MARKETING en el slide desde ~43:12. DuckDB y MotherDuck (Jordan Tigani) no aparecen en moderndatastack.xyz: 43:19–43:52.
 - Q&A: "el plan de migración más corto de una base de datos on-prem a Snowflake es de 3 años" (58:49–59:00; de chamba, lo evaluó él). Uber/Netflix migraron y regresaron (48:05–48:19). Se presenta como economista ("Soy economista", 17:54).
 
+## Recap v2 (oct 2026)
+
+Beat sheet, cortes y líneas en vivo: `montage/RECAP.md`. Momentos nuevos que v1 no usaba: "no sé quién sí haya hecho una migración de stack… lo compadezco y lo abrazo, es horrible" (5:52–6:00), "y que no sabemos si puede hacer algo en producción" (34:00), Q&A "no creo que sea buena idea migrar porque es nuevo" (57:30), "el plan de migración más corto… a Snowflake es de 3 años, en este caso" (58:53) y el cierre del Q&A "va a ser interesante si esto cambia de raíz, pero no ha cambiado en 40 años" (53:42). Timestamps por palabra: `montage/words.tsv` (whisper con contexto + envolvente de audio; los tiempos de whisper derivan hasta ~0.4 s aquí).
+
 ## Cómo se encontraron los cues
 
 `uvx --from mlx-whisper mlx_whisper audio.wav --model mlx-community/whisper-large-v3-turbo --language es --condition-on-previous-text False`. La corrida única sobre los 66 min alucina ("¡Suscríbete al canal!", "bla bla…") en la música y en el tramo 38:38–45:27; se re-transcribieron por partes (0–21:30 y 38:00–fin) con `--condition-on-previous-text False`. Reconstruir el corte: `montage/make.sh` (lee `montage/cues.tsv`).
