@@ -28,6 +28,8 @@ The history is told through Carlos's own career on a **double timeline**: the wo
 | **3. Montage** | `montage/out/anteriormente.mp4` | the 2023 mp4 (local, not committed) | plays inside slide 1, ≤ 2 min |
 | **4. Demos** | `demos/` + backup recordings | Docker, DuckDB | each demo has a `make` target and a recorded fallback |
 
+**Decisions (Oct 21, before the build):** no live demos in this iteration (Phase 4 deferred). Every [D#] slot ships its static fallback; D3's fallback uses *real* numbers computed with DuckDB on synthetic data (`demos/metric-a/`). Slide 14 is folded into slide 13. Slide 18 (interlude) stays; pruning happens after rehearsal.
+
 **Rule for Deck v1:** every demo and video slot has a static fallback that works with Carlos just talking. Phases 3 and 4 *replace* a fallback; they never add new slides. The timing rehearsed on v1 is the timing given.
 
 ---
@@ -39,7 +41,7 @@ Slots marked **[D#]** are demo slots, **[M]** is the montage slot. In v1 each sh
 ### Act 0 · Cold open (3 min)
 1. **[M] "Anteriormente en The Data Pub…"** (black screen, then montage). *v1 fallback:* 5 stills from 2023 with one caption each (Birdman · Nokia 5MP vs iPhone 2MP · Hadoop → Spark → DuckDB · "¿Puedes solo añadirle…?" · "esto es marketing").
 2. **Title.** Post-AI Data Stack · *Episodio 2*.
-3. **¿Quién es este tipo?** Hot takes callback (pandas, perros, Santos). "Hace 3 años: consultor de datos. Hoy: AI Engineer en Santander."
+3. **¿Quién es este tipo?** (Oct 21: no hot takes this time.) Carlos Haro · Sr. AI Engineer · Santander · servicios financieros · ~10 años lidiando con datos · @h1sort / h1sort.com · portrait (from the Snowflake World Tour deck) · QRs side by side: LinkedIn, X, slides (h1sort.com/datapub).
 
 ### Act 1 · Scorecard de 2023 (5 min)
 4. **Lo que les dije en julio de 2023:**
@@ -67,7 +69,7 @@ One hero visual: the **double timeline**. Top track: Ian's eras (2013 · 2016 ·
 11. **Era 2013 · preguntas que caben en un servidor → me llegó en 2018 (SAT, Data Scientist).** Boundary: two OLTP databases that can't be joined; clickstream outside. Story: R/tidyverse; finished the notebook, "¿y mi ML engineer?" "Somos tres." **Counter: 3 gráficas pulidas = 1 día.** **[D1]** *v1 fallback:* slide with the cross-database join and its error.
 12. **El desvío full-stack → 2020 (Bancomext, Software Engineer).** Story: a data person asked to be a software engineer; React + backend; never reached prod. **Counter: ∞, nunca llegó a producción.** Line: "hoy ese código es casi gratis".
 13. **Eras 2016 + 2020 · toda la empresa en un lugar, y de reportero a operador → me llegaron juntas en 2021 (Accenture).** Boundary absorbs clickstream and the warehouse, then managed ETL in / reverse ETL out. Story: Databricks ETLs + Power BI, no time for tests ("¿cómo testeas un bookmark?"). **Counter: jornadas de 18 horas.** **[D2, optional]** *v1 fallback:* the same join working in one place.
-14. **Las abstracciones son tus amigas → 2023–2025 (Accenture, Sr Data & ML Engineer).** Story: Terraform + SageMaker. **Counter: TODO (or none).**
+14. ~~Las abstracciones son tus amigas~~ **Folded into 13** (Oct 21): Terraform + SageMaker becomes one line on slide 13 (still Accenture, 2023–2025).
 15. **Julio 2023 · este escenario.** Photo from 2023, on the bottom track. "Les dije que la virtud era la ignorancia."
 16. **Era 2026 · el avión → me llegó en 2026.** First vertical arrow. `assets/2026/avion-5-agentes.png`: five agents building the Snowflake deck in one flight. **Counter: 1 vuelo.** Line: "Por primera vez, la era me llegó al mismo tiempo que a San Francisco."
 17. **Todos los contadores colapsan a "minutos".**
@@ -90,7 +92,7 @@ One hero visual: the **double timeline**. Top track: Ian's eras (2013 · 2016 ·
 28. **Birdman callback** → closing line. Extra beat now available: in 2023 Riggan's mistakes were expensive; in 2026 a wrong stack decision costs months, not years. What's still expensive is not knowing *why* it was wrong.
 29. **Gracias** · h1sort.com/datapub · QR.
 
-**Protected time:** slides 24–29 are rehearsed first and never cut. If running long, cut from Act 3 (slides 14 and 15 are expendable).
+**Protected time:** slides 24–29 are rehearsed first and never cut. If running long, cut from Act 3 (slide 15 and the interlude, 18, are expendable).
 
 **No poll this time.** Repeat attendees have taken it. The interaction is the bets on slide 27, which feeds episode 3.
 
@@ -111,7 +113,20 @@ One hero visual: the **double timeline**. Top track: Ian's eras (2013 · 2016 ·
 - **Look:** Welch Labs. Black background, thin white strokes, monospace labels, one accent color for "inside the boundary". No logo walls.
 - **Two hero visuals:** the **double timeline** (Act 3) and the **boundary diagram** (5 states: 2013, 2016, 2020, 2026, plus the 2023 callback). One inline SVG each; transitions animate; after settling, the SVG blurs and loops behind slide text.
 - **The counter:** fixed bottom-right element across Act 3, updated per slide.
-- **Format:** single self-contained `deck/index.html`, no build step, arrow keys to navigate, `N` toggles speaker notes. Images from `../assets/`. Publish with GitHub Pages.
+- **Format:** `deck/index.html` shell + one script per act in `deck/acts/` (so parallel agents don't collide), no build step, works from `file://` and GitHub Pages. Arrow keys / clicker to navigate, `N` toggles speaker notes, `P` opens a presenter window. Images from `../assets/`. Contract for slide authors: `deck/CONTRACT.md`.
+- **Particle field:** one canvas behind every slide; its shape carries the argument:
+
+  | Moment | Shape |
+  |---|---|
+  | 2023 / Acts 1–2 | `scatter`: slow, scattered (the ignorance) |
+  | Era 2013 | `two`: two clusters that can't touch (unjoinable databases) |
+  | Eras 2016–2020 | `one`: the clusters merge (the warehouse) |
+  | Era 2026 / avión | `swarm`: many small groups moving on their own (agents) |
+  | Slide 22, metric A | `split`: two clusters (two confident answers) |
+  | Slide 23, consensus | `converge`: everything to one point (one answer) |
+  | Close | back to `scatter` |
+
+  Behind text the field stays at 15–35% opacity; `F` freezes it. Strokes ≥ 2px, body text ≥ 28px on the 1920×1080 stage (projector + YouTube).
 - **Name budget:** ≤ 6 proper nouns per act.
 
 ---
@@ -122,21 +137,21 @@ One hero visual: the **double timeline**. Top track: Ian's eras (2013 · 2016 ·
 - **Astronomer**, *What Jev will do to data engineering* (Julian LaNeve & Kaxil Naik, Sep 22, 2026): https://www.astronomer.io/blog/what-jev-will-do-to-data-engineering/ — `AI_CLASSIFY`, ~250k titles, ~44B tokens, ~61,600 credits, two weeks.
   - ⚠️ **Don't say "$10,000".** The article's own dollar figure (~$1,900) doesn't match its credit count (61,600 credits at $2–4 list is far more). Use tokens and credits only.
   - Jev benchmark (4k titles): $0.16 vs $11–21 for Cortex; 88% persona agreement; "a valid type is not a correct answer" (their caveat; worth quoting the idea).
-- **Gergely Orosz**, talk (Oct 2026; event name TODO): migrations in months (Airbnb tests in 6 weeks, Uber JUnit 4→5 in 4 months, OpenAI API Python→Rust ~90% in 4–5 months), test-to-code time ratio unchanged (Jarred Sumner), zombie code reviews, junior hiring falling, teams still the unit of work.
-- **swyx**, X post, Oct 19, 2026: "Data engineers > AI engineers".
-- **Boris Cherny**, X post on five archetypes (date TODO).
+- **Gergely Orosz**, The Pragmatic Engineer, *The Pulse: We need to talk about migrations with AI* (Aug 27, 2026): https://blog.pragmaticengineer.com/the-pulse-we-need-to-talk-about-migrations-with-ai/ — Airbnb 3,500 test files in 6 weeks (1.5 eng-years manual estimate); Uber 600k unit tests JUnit 4→5 in 4 months (2 engineers). Not in this article: OpenAI Python→Rust, Jarred Sumner ratio, zombie code reviews, junior hiring. (Oct 2026 talk: not found; his only talk mentioned is LDX3 New York, Sep 15, 2026.)
+- **swyx**, X post, Oct 19, 2026 (confirmed from screenshot: 12:49 AM · Oct 19, 2026): "Data engineers > AI engineers". Post URL: not found (searched x.com; no direct hit).
+- **Boris Cherny**, X post on five archetypes: date June 28, 2026 (per secondary quote; not visible in screenshot). Post URL: not found. Secondary write-up: https://technews.tw/2026/06/29/five-key-archetypes-for-future-product-teams/
 - **Carlos's career** (LinkedIn): SAT Data Scientist 2018–2019 · Bancomext Software Engineer 2020 · Accenture Data & ML Engineer 2021–2023, Sr (Manager) 2023–2025 · Santander AI Engineer 2025–present.
-- Birdman: 4 Oscars (Picture, Director, Original Screenplay, Cinematography), dir. Alejandro G. Iñárritu.
-- Nokia N95 5MP, iPhone (1st gen) 2MP, HTC Dream 3.15MP.
+- Birdman: 4 Oscars (Picture, Director, Original Screenplay, Cinematography), dir. Alejandro G. Iñárritu. Confirmed at the 87th Academy Awards (2014 films): https://birdinflight.com/en/news/industry/birdman-wins-oscar.html
+- Nokia N95 5MP (confirmed by most sources; a 2006 Silicon Republic piece says 5.5MP: https://siliconrepublic.com/?p=487679), iPhone (1st gen) 2MP (confirmed in the same Silicon Republic piece), HTC Dream 3.15MP (not found: searched for HTC Dream camera specs, no results mention it).
 
-**Open item:** confirm which job had Databricks + Power BI and which had Terraform + SageMaker. This plan assumes both were Accenture projects (in that order).
+**Confirmed (Oct 21):** both Databricks + Power BI and Terraform + SageMaker were Accenture projects, in that order. Bancomext (2020) is the full-stack detour.
 
 ---
 
 ## 7. Phase briefs
 
 ### Phase 3 · Montage (for the Claude Code session that has the mp4)
-- Source: the July 2023 recording at `montage/src/2023.mp4` (gitignored, never committed).
+- Source: the July 2023 recording at `montage/src/2023.mp4` (gitignored, never committed). Carlos dropped it at `assets/refs/DataPub-2023.mp4` (155 MB, ignored by `*.mp4`); move it to `montage/src/` before Phase 3.
 - Find shots by transcribing the video (e.g. whisper) and matching these cue phrases:
   1. "la virtud inesperada de la ignorancia" (title)
   2. "birdman" / "Riggan" + "Mike" (the two characters)
