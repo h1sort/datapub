@@ -67,6 +67,8 @@
     #s-quien .a0-stats { display: flex; gap: 80px; margin-top: 64px; }
     #s-quien .a0-stats .big { font-size: 120px; font-weight: 500; letter-spacing: -0.03em; line-height: 1; }
     #s-quien .a0-stats .cap { font-size: 32px; color: var(--dim); margin-top: 12px; }
+    #s-quien .a0-take { margin-top: 56px; }
+    #s-quien .a0-take .txt { font-size: 38px; line-height: 1.25; margin-top: 10px; }
     /* QRs as large as the stage allows: 2×2 grid, 360px tiles, for the back of the room */
     #s-quien .a0-qrs { position: absolute; right: var(--pad-x); top: var(--pad-y);
       display: grid; grid-template-columns: repeat(2, 360px); gap: 24px 40px; }
@@ -165,6 +167,8 @@
             <div><div class="big">~10</div><div class="cap">años lidiando con datos</div></div>
             <div><div class="big">@h1sort</div><div class="cap">en todos lados</div></div>
           </div>
+          <div class="a0-take"><div class="t-label">Mi take</div>
+            <div class="txt">La educación es el 2do mejor motor de cambio de una sociedad.</div></div>
         </div>
         <div class="a0-qrs">
           <div class="a0-qr"><div class="tile"><img src="../assets/qr-linkedin.svg" alt="QR LinkedIn"></div><div class="url">linkedin.com/in/h1sort</div></div>

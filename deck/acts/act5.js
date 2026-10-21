@@ -54,10 +54,12 @@ Deck.css(`
 #s-cierre-birdman .yr { font-family: var(--mono); font-size: 24px; letter-spacing: 0.3em; color: var(--accent); display: block; margin-bottom: 14px; }
 
 /* 29: thanks */
-#s-gracias .qrwrap { position: absolute; right: 150px; top: 50%; transform: translateY(-50%); text-align: center; }
-#s-gracias .qrbox { width: 440px; height: 440px; padding: 36px; border-radius: 22px; background: #fff; }
-#s-gracias .qrbox img { width: 100%; height: 100%; display: block; image-rendering: pixelated; }
-#s-gracias .qrwrap .t-label { margin-top: 24px; }
+/* same 2×2 QR grid as who_is_this_dude, for the back of the room */
+#s-gracias .qrs { position: absolute; right: var(--pad-x); top: var(--pad-y); display: grid; grid-template-columns: repeat(2, 360px); gap: 24px 40px; }
+#s-gracias .qr { text-align: center; }
+#s-gracias .qr .tile { width: 360px; height: 360px; padding: 22px; border-radius: 20px; background: #fff; }
+#s-gracias .qr img { width: 100%; height: 100%; display: block; image-rendering: pixelated; }
+#s-gracias .qr .u { margin-top: 12px; font-family: var(--mono); font-size: 26px; color: var(--fg); }
 #s-gracias .url { font-family: var(--mono); font-size: 52px; letter-spacing: 0.01em; margin-top: 36px; }
 #s-gracias .who { margin-top: 56px; line-height: 1.5; }
 `);
@@ -220,14 +222,16 @@ Deck.act(6, 'Cierre', [
         <div class="url accent">h1sort.com/datapub</div>
         <div class="who t-small dim">Carlos Haro · The Data Pub · CDMX · 21 oct 2026</div>
       </div>
-      <div class="qrwrap" data-step="1">
-        <div class="qrbox"><img src="../assets/qr-slides.svg" alt="QR h1sort.com/datapub"></div>
-        <div class="t-label">Escanea</div>
+      <div class="qrs" data-step="1">
+        <div class="qr"><div class="tile"><img src="../assets/qr-linkedin.svg" alt="QR LinkedIn"></div><div class="u">linkedin.com/in/h1sort</div></div>
+        <div class="qr"><div class="tile"><img src="../assets/qr-x.svg" alt="QR X"></div><div class="u">x.com/h1sort</div></div>
+        <div class="qr"><div class="tile"><img src="../assets/qr-github.svg" alt="QR GitHub"></div><div class="u">github.com/h1sort</div></div>
+        <div class="qr"><div class="tile"><img src="../assets/qr-slides.svg" alt="QR slides"></div><div class="u">h1sort.com/datapub</div></div>
       </div>`,
     notes: `
       <p>Gracias. De verdad. Esto lo preparé con mucho cariño, y a los que me vieron en 2023 y volvieron: gracias por regresar.</p>
-      <p>En h1sort.com/datapub van a encontrar las diapositivas y las fuentes de todo lo que cité. El QR los lleva ahí. Nos vemos en 2029, con las manos arriba.</p>
+      <p>En h1sort.com/datapub van a encontrar las diapositivas y las fuentes de todo lo que cité. Los QR los llevan ahí, y a mi LinkedIn, X y GitHub. Nos vemos en 2029, con las manos arriba.</p>
       <p>Y ahora sí, preguntas. Las dudas incómodas son las mejores.</p>
-      <p class="dir">[Click para mostrar el QR. Dejarlo en pantalla durante todo el Q&A.]</p>`,
+      <p class="dir">[Click para mostrar los 4 QR. Dejarlos en pantalla durante todo el Q&A.]</p>`,
   },
 ]);
