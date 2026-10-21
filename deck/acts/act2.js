@@ -48,7 +48,7 @@
     /* slide 8 */
     #s-a2-respuestas .m { transition: opacity 0.6s var(--ease); }
     #s-a2-respuestas[data-at="2"] .m1, #s-a2-respuestas[data-at="3"] .m1,
-    #s-a2-respuestas[data-at="3"] .m2 { opacity: 0.3; }
+    #s-a2-respuestas[data-at="3"] .m2 { opacity: 0.55; }
     #s-a2-respuestas[data-at="1"] .n5 rect, #s-a2-respuestas[data-at="2"] .n4 rect,
     #s-a2-respuestas[data-at="3"] .n0 rect { stroke: var(--accent); stroke-width: 3; }
     #s-a2-respuestas .a2-bar { fill: var(--fg); }

@@ -49,14 +49,14 @@ Deck.css(`
 #s-cierre-birdman .ln1, #s-cierre-birdman .ln2 { font-size: 64px; line-height: 1.18; letter-spacing: -0.015em; max-width: 1500px; margin: 0; font-weight: 400; transition: opacity .5s var(--ease), color .5s; }
 #s-cierre-birdman .ln3 { font-size: 112px; line-height: 1.04; letter-spacing: -0.03em; font-weight: 500; max-width: 1600px; margin: 0; }
 #s-cierre-birdman .gap { height: 56px; }
-#s-cierre-birdman[data-at="1"] .ln1 { opacity: 0.4; }
-#s-cierre-birdman[data-at="2"] .ln1, #s-cierre-birdman[data-at="2"] .ln2 { opacity: 0.28; }
+#s-cierre-birdman[data-at="1"] .ln1 { opacity: 0.65; }
+#s-cierre-birdman[data-at="2"] .ln1, #s-cierre-birdman[data-at="2"] .ln2 { opacity: 0.55; }
 #s-cierre-birdman .yr { font-family: var(--mono); font-size: 24px; letter-spacing: 0.3em; color: var(--accent); display: block; margin-bottom: 14px; }
 
 /* 29: thanks */
 #s-gracias .qrwrap { position: absolute; right: 150px; top: 50%; transform: translateY(-50%); text-align: center; }
 #s-gracias .qrbox { width: 440px; height: 440px; padding: 36px; border-radius: 22px; background: #fff; }
-#s-gracias .qrbox img { width: 100%; height: 100%; display: block; image-rendering: pixelated; filter: invert(1); }
+#s-gracias .qrbox img { width: 100%; height: 100%; display: block; image-rendering: pixelated; }
 #s-gracias .qrwrap .t-label { margin-top: 24px; }
 #s-gracias .url { font-family: var(--mono); font-size: 52px; letter-spacing: 0.01em; margin-top: 36px; }
 #s-gracias .who { margin-top: 56px; line-height: 1.5; }
@@ -220,7 +220,7 @@ Deck.act(6, 'Cierre', [
         <div class="who t-small dim">Carlos Haro · The Data Pub · CDMX · 21 oct 2026</div>
       </div>
       <div class="qrwrap" data-step="1">
-        <div class="qrbox"><img src="../assets/qr-datapub.svg" alt="QR h1sort.com/datapub"></div>
+        <div class="qrbox"><img src="../assets/qr-slides.svg" alt="QR h1sort.com/datapub"></div>
         <div class="t-label">Escanea</div>
       </div>`,
     notes: `

@@ -3,9 +3,9 @@
 :root {
   --bg: #000;
   --fg: #fff;
-  --dim: rgba(255, 255, 255, 0.62);
-  --faint: rgba(255, 255, 255, 0.34);
-  --hair: rgba(255, 255, 255, 0.18);
+  --dim: #d6d6d6;    /* secondary text: ~84% white, readable from the back */
+  --faint: #a3a3a3;  /* tertiary: labels, credits, dim strokes */
+  --hair: rgba(255, 255, 255, 0.3);
   --accent: #f5c542;
   --accent-dim: rgba(245, 197, 66, 0.35);
   --good: #7ee0a1;
@@ -105,7 +105,7 @@ svg [data-step], svg [data-step-only] { transform: none; }
 [data-step-hide] { transition: opacity 0.4s var(--ease); }
 [data-step-hide].gone { opacity: 0; }
 /* .dim-after: earlier items fade back once later steps appear (use on lists) */
-.focus-last > .shown:not(:last-child):has(~ .shown) { opacity: 0.38; }
+.focus-last > .shown:not(:last-child):has(~ .shown) { opacity: 0.6; }
 
 /* ---- chrome --------------------------------------------------------------- */
 #label { position: absolute; left: var(--pad-x); bottom: 44px; font-family: var(--mono); font-size: 20px;

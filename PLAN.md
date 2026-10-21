@@ -41,7 +41,7 @@ Slots marked **[D#]** are demo slots, **[M]** is the montage slot. In v1 each sh
 ### Act 0 · Cold open (3 min)
 1. **[M] "Anteriormente en The Data Pub…"** (black screen, then montage). *v1 fallback:* 5 stills from 2023 with one caption each (Birdman · Nokia 5MP vs iPhone 2MP · Hadoop → Spark → DuckDB · "¿Puedes solo añadirle…?" · "esto es marketing").
 2. **Title.** Post-AI Data Stack · *Episodio 2*.
-3. **¿Quién es este tipo?** (Oct 21: no hot takes this time.) Carlos Haro · Sr. AI Engineer · Santander · servicios financieros · ~10 años lidiando con datos · @h1sort / h1sort.com · portrait (from the Snowflake World Tour deck) · QRs side by side: LinkedIn, X, slides (h1sort.com/datapub).
+3. **who_is_this_dude?** (Oct 21: renamed; no hot takes this time; QRs in a 2×2 grid, 360px tiles.) Carlos Haro · Sr. AI Engineer · Santander · servicios financieros · ~10 años lidiando con datos · @h1sort / h1sort.com · portrait (from the Snowflake World Tour deck) · QRs with centre icons: LinkedIn, X, GitHub, slides (h1sort.com/datapub).
 
 ### Act 1 · Scorecard de 2023 (5 min)
 4. **Lo que les dije en julio de 2023:**

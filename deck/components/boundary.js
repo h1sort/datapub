@@ -122,7 +122,7 @@
       };
       const svg = mk('svg', { viewBox: '0 0 1680 560', role: 'img', 'aria-label': 'Boundary del data stack' });
       const defs = mk('defs', {}, svg);
-      for (const [id, color] of [['bd-ah', 'rgba(255,255,255,0.62)'], ['bd-aha', '#f5c542']]) {
+      for (const [id, color] of [['bd-ah', '#d6d6d6'], ['bd-aha', '#f5c542']]) {
         const m = mk('marker', { id, viewBox: '0 0 10 10', refX: 9, refY: 5, markerWidth: 8, markerHeight: 8, orient: 'auto' }, defs);
         mk('path', { d: 'M0,0 L10,5 L0,10 z', fill: color, stroke: 'none' }, m);
       }

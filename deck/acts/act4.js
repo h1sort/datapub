@@ -51,7 +51,7 @@ Deck.css(`
 #s-metrica-a[data-at="3"] .a4-sql { max-height: 0; opacity: 0; padding-top: 0; padding-bottom: 0; border-width: 0; }
 #s-metrica-a .a4-num { font-size: 84px; font-weight: 500; letter-spacing: -0.02em; margin-top: 18px; line-height: 1; transition: opacity 0.5s, font-size 0.5s var(--ease); }
 #s-metrica-a .a4-num small { font-size: 32px; color: var(--dim); letter-spacing: 0; font-weight: 400; }
-#s-metrica-a[data-at="3"] .a4-def { opacity: 0.4; }
+#s-metrica-a[data-at="3"] .a4-def { opacity: 0.6; }
 #s-metrica-a[data-at="3"] .a4-num { font-size: 56px; }
 #s-metrica-a .a4-agreed { margin-top: 44px; display: grid; grid-template-columns: 1fr 760px; gap: 56px; align-items: center;
   border: 2px solid var(--accent); border-radius: 18px; padding: 32px 44px; }

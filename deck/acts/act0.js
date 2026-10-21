@@ -56,20 +56,24 @@
     #s-title .a0-by { display: flex; gap: 28px; align-items: center; }
     #s-title .a0-by .bar { width: 64px; height: 2px; background: var(--faint); }
 
-    #s-quien .a0-who-l { position: absolute; left: var(--pad-x); top: var(--pad-y); width: 1180px; }
-    #s-quien .a0-name { font-size: 76px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.05; }
-    #s-quien .a0-role { font-size: 38px; margin-top: 14px; }
-    #s-quien .a0-stats { display: flex; gap: 120px; margin-top: 64px; }
-    #s-quien .a0-stats .big { font-size: 128px; font-weight: 500; letter-spacing: -0.03em; line-height: 1; }
-    #s-quien .a0-stats .cap { font-size: 32px; color: var(--dim); margin-top: 12px; }
-    #s-quien .a0-portrait { position: absolute; right: 150px; top: 150px; width: 440px; height: 440px; border-radius: 50%;
-      overflow: hidden; border: var(--stroke) solid var(--faint); box-shadow: 0 0 0 14px #000, 0 0 0 16px var(--hair); }
+    #s-quien .a0-who-l { position: absolute; left: var(--pad-x); top: var(--pad-y); width: 860px; }
+    #s-quien .a0-title { font-family: var(--mono); font-size: 72px; font-weight: 500; letter-spacing: -0.02em; margin: 0; }
+    #s-quien .a0-id { display: flex; align-items: center; gap: 40px; margin-top: 56px; }
+    #s-quien .a0-portrait { flex: none; width: 260px; height: 260px; border-radius: 50%; overflow: hidden;
+      border: var(--stroke) solid var(--faint); box-shadow: 0 0 0 10px #000, 0 0 0 12px var(--hair); }
     #s-quien .a0-portrait img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(1); }
-    #s-quien .a0-qrs { position: absolute; left: var(--pad-x); top: 676px; display: flex; gap: 56px; }
+    #s-quien .a0-name { font-size: 68px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.05; }
+    #s-quien .a0-role { font-size: 34px; line-height: 1.3; margin-top: 14px; }
+    #s-quien .a0-stats { display: flex; gap: 80px; margin-top: 64px; }
+    #s-quien .a0-stats .big { font-size: 120px; font-weight: 500; letter-spacing: -0.03em; line-height: 1; }
+    #s-quien .a0-stats .cap { font-size: 32px; color: var(--dim); margin-top: 12px; }
+    /* QRs as large as the stage allows: 2×2 grid, 360px tiles, for the back of the room */
+    #s-quien .a0-qrs { position: absolute; right: var(--pad-x); top: var(--pad-y);
+      display: grid; grid-template-columns: repeat(2, 360px); gap: 24px 40px; }
     #s-quien .a0-qr { text-align: center; }
-    #s-quien .a0-qr .tile { width: 200px; height: 200px; padding: 16px; border-radius: 16px; background: #fff; }
+    #s-quien .a0-qr .tile { width: 360px; height: 360px; padding: 22px; border-radius: 20px; background: #fff; }
     #s-quien .a0-qr img { width: 100%; height: 100%; display: block; image-rendering: pixelated; }
-    #s-quien .a0-qr .t-label { margin-top: 14px; }
+    #s-quien .a0-qr .url { margin-top: 12px; font-family: var(--mono); font-size: 26px; color: var(--fg); }  /* typeable, exact case */
   `);
 
   Deck.act(0, 'Anteriormente', [
@@ -142,30 +146,35 @@
     },
     {
       id: 'quien',
-      title: '¿Quién es este tipo?',
+      title: 'who_is_this_dude?',
       time: 50,
       class: 'middle',
       particles: { shape: 'scatter', opacity: 0.2 },
       html: `
         <div class="a0-who-l">
-          <h1 class="t-title">¿Quién es este tipo?</h1>
-          <div class="a0-name">Carlos Haro</div>
-          <div class="a0-role">Sr. AI Engineer · Santander <span class="dim">· servicios financieros</span></div>
+          <h1 class="a0-title">who_is_this_dude?</h1>
+          <div class="a0-id">
+            <div class="a0-portrait"><img src="../assets/carlos-portrait.jpg" alt="Carlos Haro"></div>
+            <div>
+              <div class="a0-name">Carlos Haro</div>
+              <div class="a0-role">Sr. AI Engineer<br>Santander <span class="dim">· servicios financieros</span></div>
+            </div>
+          </div>
           <div class="a0-stats">
             <div><div class="big">~10</div><div class="cap">años lidiando con datos</div></div>
-            <div><div class="big">@h1sort</div><div class="cap">h1sort.com</div></div>
+            <div><div class="big">@h1sort</div><div class="cap">en todos lados</div></div>
           </div>
         </div>
-        <div class="a0-portrait"><img src="../assets/carlos-portrait.jpg" alt="Carlos Haro"></div>
         <div class="a0-qrs">
-          <div class="a0-qr"><div class="tile"><img src="../assets/qr-linkedin.svg" alt="QR LinkedIn"></div><div class="t-label">LinkedIn</div></div>
-          <div class="a0-qr"><div class="tile"><img src="../assets/qr-x.svg" alt="QR X"></div><div class="t-label">X</div></div>
-          <div class="a0-qr"><div class="tile"><img src="../assets/qr-slides.svg" alt="QR slides"></div><div class="t-label">Slides</div></div>
+          <div class="a0-qr"><div class="tile"><img src="../assets/qr-linkedin.svg" alt="QR LinkedIn"></div><div class="url">linkedin.com/in/h1sort</div></div>
+          <div class="a0-qr"><div class="tile"><img src="../assets/qr-x.svg" alt="QR X"></div><div class="url">x.com/h1sort</div></div>
+          <div class="a0-qr"><div class="tile"><img src="../assets/qr-github.svg" alt="QR GitHub"></div><div class="url">github.com/h1sort</div></div>
+          <div class="a0-qr"><div class="tile"><img src="../assets/qr-slides.svg" alt="QR slides"></div><div class="url">h1sort.com/datapub</div></div>
         </div>`,
       notes: `
-        <p>Para los que no me conocen: soy Carlos Haro, Sr. AI Engineer en Santander, servicios financieros. Llevo unos diez años lidiando con datos. En todos lados soy @h1sort.</p>
+        <p>Para los que no me conocen: soy Carlos Haro, Sr. AI Engineer en Santander, servicios financieros. Llevo unos diez años lidiando con datos. En todos lados soy @h1sort: LinkedIn, X, GitHub y h1sort.com.</p>
         <p>Hace tres años, cuando di la primera plática aquí, era consultor de datos. En el camino pasé por el SAT, por Bancomext y por una consultora, así que me ha tocado ver los datos desde varios lados de la mesa.</p>
-        <p class="dir">[Dejar unos segundos para que escaneen: LinkedIn, X y las slides.]</p>
+        <p class="dir">[Dejar unos segundos para que escaneen: LinkedIn, X, GitHub y las slides.]</p>
         <p>Les cuento esto porque lo que sigue es una calificación de mí mismo: voy a revisar qué dije en 2023 y qué tan mal me fue. Así que sí: toca el scorecard.</p>`,
     },
   ]);
