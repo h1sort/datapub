@@ -7,6 +7,16 @@ Rebuild: `montage/make.sh` (edit list in `cues.tsv`, caption words in `words.tsv
 
 **Visual grammar.** Everything from 2023 is labelled **THE DATA PUB · JULIO 2023 · ▶ mm:ss** (the timestamp in the original recording, for provenance). Captions from 2023 are ALL CAPS, word by word, with the active word in amber. The 2026 cards are sentence case on black, with no outline and a mono date label, so they can never be read as a 2023 quote.
 
+## Music (v3)
+
+An original score, synthesized by `score.py`, so there's no licensed music and no Content ID claim on the YouTube stream. It's placed from `captions.ass`, so it stays in sync after a re-cut:
+- Ticking drone under the hook, then a braam and taiko hit on **THE DATA PUB · JULIO 2023**.
+- An 8th-note pulse in D minor that thickens act by act (i–VI–III–VII after JUGUETE, an octave layer after 3 MESES).
+- Taiko hits on every slam word, with a lift into **TRIUNFAR**.
+- Then near-silence, a heartbeat and a riser for the cliffhanger, a braam on **40 AÑOS**, and a final unresolved braam (A over D) on **¿Sigue siendo cierto?**.
+
+Mix: the bed is at about −21 LUFS before ducking and drops about 16 dB under the voice (sidechain on the speech), coming back up in the gaps. In the 300–4000 Hz speech band the voice sits a median 33 dB above the music. Final −16 LUFS. The no-music cut is kept at `work/v2/nomusic.mp4`.
+
 ## Beats
 
 Out = time in the recap. Src = time in the 2023 recording (talk 3:08–45:25, Q&A after).
