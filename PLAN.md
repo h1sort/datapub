@@ -58,7 +58,7 @@ Slots marked **[D#]** are demo slots, **[M]** is the montage slot. In v1 each sh
 6. **Puente:** "Hoy nadie habla de stacks. Todo el mundo habla de agentes. ¿Cambió el stack, o cambió otra cosa?"
 
 ### Act 2 · El ejemplo mínimo, recargado (5 min)
-7. **El diagrama de 2023**, as is (`assets/2023/ejemplo-minimo-diagrama.png`). "¿Puedes solo añadirle…?" Metrics A and B.
+7. **El diagrama de 2023**, as is (`assets/2023/ejemplo-minimo-diagrama.webp`). "¿Puedes solo añadirle…?" Metrics A and B.
 8. **Las respuestas de 2023:** A y B en visualización → 5 min. A en modelo semántico → 0.5 días. B en sistema fuente → 3 meses, 5+ personas. (`ejemplo-minimo-5min.png`, `ejemplo-minimo-3meses.png`)
 9. **El mismo diagrama en 2026:** every label animates to "≈ minutos", because the agent walks straight to the source. End on **"¿y es verdad?"**. Left unanswered; Act 4 pays it off with metric A itself.
 
@@ -71,7 +71,7 @@ One hero visual: the **double timeline**. Top track: Ian's eras (2013 · 2016 ·
 13. **Eras 2016 + 2020 · toda la empresa en un lugar, y de reportero a operador → me llegaron juntas en 2021 (Accenture).** Boundary absorbs clickstream and the warehouse, then managed ETL in / reverse ETL out. Story: Databricks ETLs + Power BI, no time for tests ("¿cómo testeas un bookmark?"). **Counter: jornadas de 18 horas.** **[D2, optional]** *v1 fallback:* the same join working in one place.
 14. ~~Las abstracciones son tus amigas~~ **Folded into 13** (Oct 21): Terraform + SageMaker becomes one line on slide 13 (still Accenture, 2023–2025).
 15. **Julio 2023 · este escenario.** Photo from 2023, on the bottom track. "Les dije que la virtud era la ignorancia."
-16. **Era 2026 · el avión → me llegó en 2026.** First vertical arrow. `assets/2026/avion-5-agentes.png`: five agents building the Snowflake deck in one flight. **Counter: 1 vuelo.** Line: "Por primera vez, la era me llegó al mismo tiempo que a San Francisco."
+16. **Era 2026 · el avión → me llegó en 2026.** First vertical arrow. `assets/2026/avion-5-agentes.webp`: five agents building the Snowflake deck in one flight. **Counter: 1 vuelo.** Line: "Por primera vez, la era me llegó al mismo tiempo que a San Francisco."
 17. **Todos los contadores colapsan a "minutos".**
 18. **Interludio (30 s): ¿qué hay dentro de la caja mágica?** Welch-style transformer computing 41 + 26 (`assets/refs/welch-style-transformer.png` as the look reference).
 
