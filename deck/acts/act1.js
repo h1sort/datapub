@@ -64,7 +64,7 @@
           <div class="a1-row" data-step="2"><div class="a1-v good"><b>✓</b>Acerté</div>
             <div class="a1-t">DuckDB.<small>El “juguete” ya no es de juguete.</small></div></div>
           <div class="a1-row" data-step="3"><div class="a1-v bad"><b>✗</b>Fallé</div>
-            <div class="a1-t">dbt.<small>Tres años después, todavía no en algunos lugares.</small></div></div>
+            <div class="a1-t">dbt.<small>Tres años después, todavía no en producción en algunos lugares.</small></div></div>
           <div class="a1-row hot" data-step="4"><div class="a1-v accent"><b>↻</b>Ya no es cierto</div>
             <div class="a1-t">“Migrar cuesta años.”<small><s>años</s> &rarr; <em>meses</em></small></div></div>
           <div class="a1-row" data-step="5"><div class="a1-v accent"><b>!</b>No lo vi venir</div>
@@ -74,7 +74,7 @@
         <p class="dir">[Un clic por renglón. Pausa larga en el cuarto: es el importante.]</p>
         <p>Calificación. "El MDS es marketing": acerté. Hoy ya ni lo decimos; nadie sube al escenario a presumir su Modern Data Stack. DuckDB: también. Lo que llamé juguete hoy está en todos lados. [TODO Carlos: un ejemplo propio de DuckDB en tu día a día.]</p>
         <p>dbt: fallé. Pensé que ya sería estándar y tres años después, en algunos lugares todavía no está en producción. Ni modo.</p>
-        <p>Ahora, el cuarto. "Migrar cuesta años." Mi consejo sigue vivo: no migren por novedad. Pero la razón que les di se cayó. Gergely Orosz contó casos en una charla de este mes: Airbnb migró sus tests en seis semanas; Uber pasó JUnit 4 a 5 en cuatro meses. Lo que tomaba años, hoy toma meses. [Fuente: Gergely Orosz, charla de oct 2026; nombre del evento TODO.]</p>
+        <p>Ahora, el cuarto. "Migrar cuesta años." Mi consejo sigue vivo: no migren por novedad. Pero la razón que les di se cayó. Gergely Orosz contó casos en su keynote de LDX3 en Nueva York, en septiembre: Airbnb migró sus tests en seis semanas; Uber pasó JUnit 4 a 5 en cuatro meses. Lo que tomaba años, hoy toma meses. [Fuente: Gergely Orosz, charla de oct 2026; nombre del evento TODO.]</p>
         <p>Y lo quinto, lo que no vi venir: los agentes.</p>
         <p>Y eso nos lleva a la pregunta de hoy.</p>`,
     },
