@@ -7,6 +7,9 @@ window.Deck = (() => {
   const qs = new URLSearchParams(location.search);
   const SHOT = qs.has('shot');
   const PUBLIC = document.documentElement.hasAttribute('data-public'); // web copy: no notes, no presenter
+  const MIRROR = qs.has('mirror');     // presenter window: same slides + notes, follows the projector window
+  // Keeps the projector and mirror windows on the same slide (needs http://, not file://).
+  const sync = !PUBLIC && 'BroadcastChannel' in window ? new BroadcastChannel('datapub-deck') : null;
   const ctx = { shot: SHOT, W, H, particles: window.Particles };
   let idx = -1, step = 0, els = [];
   let presenter = null, clockStart = null;
@@ -45,6 +48,17 @@ window.Deck = (() => {
     });
 
     if (SHOT) document.documentElement.classList.add('shot');
+    if (MIRROR) {
+      document.body.classList.add('mirror');
+      document.title = 'Notas · ' + document.title;
+      $('#notes').classList.add('on');
+      document.querySelectorAll('video').forEach((v) => { v.muted = true; });   // sound only on the projector
+      setInterval(renderNotes, 1000);                                          // clock
+    }
+    sync?.addEventListener('message', ({ data }) => {
+      if (data.clockStart !== undefined && clockStart === null) clockStart = data.clockStart;
+      if (data.i !== idx || data.s !== step) go(data.i, data.s, true);
+    });
     Particles.init($('#field'));
     fit();
     addEventListener('resize', fit);
@@ -83,7 +97,7 @@ window.Deck = (() => {
     return m ? [Math.max(0, Math.min(slides.length - 1, +m[1] - 1)), +(m[2] || 0)] : [0, 0];
   }
 
-  function go(i, s = 0) {
+  function go(i, s = 0, fromSync = false) {
     i = Math.max(0, Math.min(slides.length - 1, i));
     s = Math.max(0, Math.min(slides[i].steps, s));
     if (i !== idx) {
@@ -103,10 +117,11 @@ window.Deck = (() => {
     slides[idx].onStep?.(els[idx], step, ctx);
     updateChrome();
     history.replaceState(null, '', `${location.pathname}${location.search}#/${idx + 1}/${step}`);
+    if (sync && !fromSync) sync.postMessage({ i: idx, s: step, clockStart });
   }
 
   function next() {
-    if (clockStart === null) clockStart = Date.now();
+    if (clockStart === null) clockStart = Date.now();   // also shared with the mirror via sync
     if (step < slides[idx].steps) go(idx, step + 1);
     else if (idx < slides.length - 1) go(idx + 1, 0);
   }
@@ -172,7 +187,8 @@ window.Deck = (() => {
     else if (k === 'f' || k === 'F') Particles.toggleFreeze();
     else if (PUBLIC) return;
     else if (k === 'n' || k === 'N') { $('#notes').classList.toggle('on'); renderNotes(); }
-    else if (k === 'p' || k === 'P') openPresenter();
+    else if ((k === 'p' || k === 'P') && !MIRROR) openMirror();
+    else if (k === 'o' || k === 'O') openPresenter();                       // old text-only presenter
     else if (k === 't' || k === 'T') { clockStart = Date.now(); renderPresenter(); }
   }
 
@@ -233,8 +249,21 @@ window.Deck = (() => {
     const box = $('#notes');
     if (!box.classList.contains('on')) return;
     const s = slides[idx];
-    box.innerHTML = `<div class="meta">${idx + 1}/${slides.length} · ${s.title || s.id || ''}` +
-      `${s.steps ? ` · paso ${step}/${s.steps}` : ''}</div><div class="body">${s.notes || '—'}</div>`;
+    let meta = `${idx + 1}/${slides.length} · ${s.title || s.id || ''}${s.steps ? ` · paso ${step}/${s.steps}` : ''}`;
+    if (MIRROR) {
+      const elapsed = clockStart ? (Date.now() - clockStart) / 1000 : 0, delta = elapsed - plannedBefore(idx);
+      const n = slides[idx + 1];
+      meta = `<span class="clock">${fmt(elapsed)}</span> <span class="${delta > 30 ? 'late' : delta < -30 ? 'early' : ''}">` +
+        `${delta >= 0 ? '+' : ''}${fmt(delta)}</span> · ${meta} · <span class="next">siguiente: ${n ? (n.title || n.id) : 'fin'}</span>`;
+    }
+    box.innerHTML = `<div class="meta">${meta}</div><div class="body">${s.notes || '—'}</div>`;
+  }
+
+  // P: open the mirror (same deck + notes) for the laptop screen; this window goes on the projector.
+  function openMirror() {
+    const u = new URL(location.href);
+    u.searchParams.set('mirror', '');
+    window.open(u.toString().replace('mirror=', 'mirror'), 'datapub-mirror', 'width=1280,height=800');
   }
 
   function openPresenter() {

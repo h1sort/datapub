@@ -129,6 +129,13 @@ svg [data-step], svg [data-step-only] { transform: none; }
          background: rgba(12, 12, 12, 0.94); border-top: 1px solid #333; padding: 18px 28px; font-size: 18px; line-height: 1.5; }
 #notes.on { display: block; }
 #notes .meta { font-family: var(--mono); color: #999; margin-bottom: 8px; }
+/* mirror (presenter) window: bigger notes, live clock */
+body.mirror #notes { max-height: 48vh; font-size: 22px; background: rgba(12, 12, 12, 0.95); }
+body.mirror #notes .meta { font-size: 18px; color: #bbb; }
+body.mirror #notes .clock { color: #fff; font-size: 26px; }
+body.mirror #notes .late { color: var(--bad); } body.mirror #notes .early { color: var(--good); }
+body.mirror #notes .next { color: #888; }
+body.mirror #notes .dir { color: var(--accent); }
 #notes p { margin: 0 0 0.6em; max-width: 90ch; }
 
 /* ---- screenshot mode: no transitions, final states ------------------------ */
