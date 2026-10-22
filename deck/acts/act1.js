@@ -74,7 +74,7 @@
         <p class="dir">[Un clic por renglón. Pausa larga en el cuarto: es el importante.]</p>
         <p>Calificación. "El MDS es marketing": acerté. Hoy ya ni lo decimos; nadie sube al escenario a presumir su Modern Data Stack. DuckDB: también. Lo que llamé juguete hoy está en todos lados. [Opcional: un ejemplo tuyo de DuckDB en una frase.]</p>
         <p>dbt: fallé. Pensé que ya sería estándar y tres años después, en algunos lugares todavía no está en producción. Ni modo.</p>
-        <p>Ahora, el cuarto. "Migrar cuesta años." Mi consejo sigue vivo: no migren por novedad. Pero la razón que les di se cayó. Gergely Orosz contó casos en su keynote de LDX3 en Nueva York, en septiembre: Airbnb migró sus tests en seis semanas; Uber pasó JUnit 4 a 5 en cuatro meses. Lo que tomaba años, hoy toma meses. [Fuente: Gergely Orosz, charla de oct 2026; nombre del evento TODO.]</p>
+        <p>Ahora, el cuarto. "Migrar cuesta años." Mi consejo sigue vivo: no migren por novedad. Pero la razón que les di se cayó. Gergely Orosz contó casos en su keynote de LDX3 en Nueva York, en septiembre: Airbnb migró sus tests en seis semanas; Uber pasó JUnit 4 a 5 en cuatro meses. Lo que tomaba años, hoy toma meses. [Fuente: Gergely Orosz, The Pragmatic Engineer (27 ago 2026) y su keynote en LDX3 Nueva York.]</p>
         <p>Y lo quinto, lo que no vi venir: los agentes.</p>
         <p>Y eso nos lleva a la pregunta de hoy.</p>`,
     },
