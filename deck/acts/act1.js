@@ -45,7 +45,7 @@
       notes: `
         <p class="dir">[Un clic por afirmación. No leerlas: contarlas.]</p>
         <p>Vamos a revisar mi tarea de hace tres años. En julio de 2023 les dije cuatro cosas.</p>
-        <p>Uno: el Modern Data Stack es marketing. Dos: DuckDB, ese retador de juguete, que yo sí decía que había que mirar. Tres: no migren nada solo porque algo es nuevo, porque migrar cuesta años. Yo tenía el dato en mi propia chamba: la migración más corta que evalué, de on-premise a Snowflake, fueron tres años. [TODO Carlos: confirma que ese "3 años" es tu caso real y cuéntalo en una frase.]</p>
+        <p>Uno: el Modern Data Stack es marketing. Dos: DuckDB, ese retador de juguete, que yo sí decía que había que mirar. Tres: no migren nada solo porque algo es nuevo, porque migrar cuesta años. Yo tenía el dato en mi propia chamba: la migración más corta que evalué, de on-premise a Snowflake, fueron tres años. [Lo dijiste en el Q&A de 2023 (58:53): una evaluación de chamba, on-prem → Snowflake, 3 años "en este caso".]</p>
         <p>Y cuatro, mi favorita: Riggan, el de Birdman, puede tomar todas las decisiones erróneas y aun así triunfar. O sea: no se estresen tanto con el stack.</p>
         <p>Suena muy seguro, ¿no? Veamos cuántas me salieron.</p>`,
     },
@@ -72,7 +72,7 @@
         </div>`,
       notes: `
         <p class="dir">[Un clic por renglón. Pausa larga en el cuarto: es el importante.]</p>
-        <p>Calificación. "El MDS es marketing": acerté. Hoy ya ni lo decimos; nadie sube al escenario a presumir su Modern Data Stack. DuckDB: también. Lo que llamé juguete hoy está en todos lados. [TODO Carlos: un ejemplo propio de DuckDB en tu día a día.]</p>
+        <p>Calificación. "El MDS es marketing": acerté. Hoy ya ni lo decimos; nadie sube al escenario a presumir su Modern Data Stack. DuckDB: también. Lo que llamé juguete hoy está en todos lados. [Opcional: un ejemplo tuyo de DuckDB en una frase.]</p>
         <p>dbt: fallé. Pensé que ya sería estándar y tres años después, en algunos lugares todavía no está en producción. Ni modo.</p>
         <p>Ahora, el cuarto. "Migrar cuesta años." Mi consejo sigue vivo: no migren por novedad. Pero la razón que les di se cayó. Gergely Orosz contó casos en su keynote de LDX3 en Nueva York, en septiembre: Airbnb migró sus tests en seis semanas; Uber pasó JUnit 4 a 5 en cuatro meses. Lo que tomaba años, hoy toma meses. [Fuente: Gergely Orosz, charla de oct 2026; nombre del evento TODO.]</p>
         <p>Y lo quinto, lo que no vi venir: los agentes.</p>
